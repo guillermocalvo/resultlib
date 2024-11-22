@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+<style>@media (prefers-color-scheme: dark) { .themed { fill: #eee; } }</style>
+<!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+<path class="themed" d="M 107.61599,15.869308 H 20.383989 c -4.0044,0 -6.016,4.8692 -3.1772,7.708 l 34.7612,34.7612 v 38.7468 c 0,1.4664 0.7144,2.8576 1.9176,3.703602 l 15.04,10.528 c 2.9704,2.068 7.1064,-0.0376 7.1064,-3.7036 V 58.338508 l 34.761201,-34.78 c 2.8388,-2.82 0.8272,-7.6892 -3.1772,-7.6892 z"/>
+</svg>

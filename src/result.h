@@ -14,6 +14,27 @@
  * limitations under the License.
  */
 
+/**
+ * A header-only C library to handle errors elegantly.
+ *
+ * ![](docs/result-logo.svg)
+ *
+ * This library consists of one header file only. All you need to do is copy
+ * `result.h` into your project, and include it.
+ *
+ * ```c
+ * #include "result.h"
+ * ```
+ *
+ * Since it's a header-only library, there is no library code to link against.
+ *
+ * @file        result.h
+ * @version     0.1.0
+ * @author      [Guillermo Calvo](https://guillermo.dev)
+ * @copyright   Licensed under Apache 2.0
+ * @see         For more information, visit the
+ *              [project on GitHub](https://github.com/guillermocalvo/resultlib)
+ */
 
 #ifndef RESULT_VERSION
 

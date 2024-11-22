@@ -1,0 +1,38 @@
+
+div.features:empty {
+  display: none;
+}
+
+div.features {
+  ul {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2em;
+    text-align: center;
+    margin: 0 0 4em 0;
+    padding: 0;
+
+    li {
+      flex: 30%;
+    }
+  }
+
+  li {
+    list-style: none;
+  }
+
+  img {
+    display: inline-block;
+    width: 10em;
+  }
+
+  strong, b {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  div.features ul li {
+    flex: 100%;
+  }
+}

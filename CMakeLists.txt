@@ -3,6 +3,32 @@ cmake_minimum_required(VERSION 3.29)
 project(resultlib C)
 
 set(CMAKE_C_STANDARD 23)
+set(RESULT_VERSION "0.1")
+
+include(FetchContent)
+FetchContent_Declare(
+        doxygen-awesome-css
+        URL https://github.com/jothepro/doxygen-awesome-css/archive/refs/heads/main.zip
+)
+FetchContent_MakeAvailable(doxygen-awesome-css)
+FetchContent_GetProperties(doxygen-awesome-css SOURCE_DIR AWESOME_CSS_DIR)
+
+# Doxygen
+find_package(Doxygen)
+
+if (DOXYGEN_FOUND)
+    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
+    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile.out)
+    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+    add_custom_target(docs
+            COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/docs
+            COMMENT "Generating documentation with Doxygen"
+            VERBATIM
+    )
+else (DOXYGEN_FOUND)
+    message("Install Doxygen to generate the documentation")
+endif (DOXYGEN_FOUND)
 
 enable_testing()
 
@@ -55,4 +81,17 @@ foreach(TEST IN LISTS TESTS)
     target_include_directories(${TEST} PUBLIC src)
     add_test(NAME ${TEST} COMMAND $<TARGET_FILE:${TEST}>)
     set_property(TEST ${TEST} PROPERTY SKIP_RETURN_CODE 77)
+endforeach()
+
+set(EXAMPLES
+        example
+        pet-store
+)
+
+foreach(EXAMPLE IN LISTS EXAMPLES)
+    add_executable(${EXAMPLE} "examples/${EXAMPLE}.c")
+    set_target_properties(${EXAMPLE} PROPERTIES COMPILE_WARNING_AS_ERROR ON)
+    target_include_directories(${EXAMPLE} PUBLIC src)
+    add_test(NAME ${EXAMPLE} COMMAND $<TARGET_FILE:${EXAMPLE}>)
+    set_property(TEST ${EXAMPLE} PROPERTY SKIP_RETURN_CODE 77)
 endforeach()
