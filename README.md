@@ -2,7 +2,7 @@
 [![Build Status][BADGE_BUILD_STATUS]][BUILD_STATUS]
 [![Quality Gate Status][BADGE_QUALITY_GATE]][QUALITY_GATE]
 [![Docs Status][BADGE_DOCS_STATUS]][DOCS]
-[![Latest Release][BADGE_LATEST_RELEASE]][RELEASES]
+[![Latest Release][BADGE_LATEST_RELEASE]][LATEST_RELEASE]
 
 ![Result Library][LOGO]
 
@@ -164,10 +164,10 @@ See the License for the specific language governing permissions and limitations 
 [EXAMPLE_USING_RESULTS]:        docs/using-results.png
 [GUILLERMO]:                    https://guillermo.dev/
 [GUILLERMO_IMAGE]:              https://guillermo.dev/assets/images/thumb.png
+[LATEST_RELEASE]:               https://github.com/guillermocalvo/resultlib/releases/latest
 [LOGO]:                         docs/result-logo.svg
 [NULL_CHECKING]:                https://en.wikipedia.org/wiki/Nullable_type#Compared_with_null_pointers
 [OUTPUT_PARAMETERS]:            https://en.wikipedia.org/wiki/Parameter_(computer_programming)#Output_parameters
 [QUALITY_GATE]:                 https://sonarcloud.io/dashboard?id=guillermocalvo_resultlib
-[RELEASES]:                     https://github.com/guillermocalvo/resultlib/releases
 [SENTINEL_VALUE]:               https://en.wikipedia.org/wiki/Sentinel_value
 [TYPEOF]:                       https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2899.htm
