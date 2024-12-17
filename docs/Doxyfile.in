@@ -1,0 +1,129 @@
+
+#---------------------------------------------------------------------------
+# Project related configuration options
+#---------------------------------------------------------------------------
+
+PROJECT_NAME           = "Result Library"
+PROJECT_NUMBER         = "@RESULT_VERSION@"
+PROJECT_BRIEF          = "Elegant error handling in C"
+PROJECT_LOGO           = @CMAKE_CURRENT_SOURCE_DIR@/docs/logo.svg
+PROJECT_ICON           = @CMAKE_CURRENT_SOURCE_DIR@/docs/icon.svg
+OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/doxygen/
+CREATE_SUBDIRS         = NO
+FULL_PATH_NAMES        = NO
+JAVADOC_AUTOBRIEF      = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
+
+
+#---------------------------------------------------------------------------
+# Build related configuration options
+#---------------------------------------------------------------------------
+
+EXTRACT_ALL            = YES
+HIDE_SCOPE_NAMES       = YES
+SORT_MEMBER_DOCS       = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to warning and progress messages
+#---------------------------------------------------------------------------
+
+WARN_NO_PARAMDOC       = YES
+WARN_AS_ERROR          = YES
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the input files
+#---------------------------------------------------------------------------
+
+INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/src/ \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/README.md
+FILE_PATTERNS          = *.c \
+                         *.h \
+                         *.md
+EXAMPLE_PATH           = @CMAKE_CURRENT_SOURCE_DIR@/examples/
+IMAGE_PATH             = @CMAKE_CURRENT_SOURCE_DIR@/docs
+USE_MDFILE_AS_MAINPAGE = @CMAKE_CURRENT_SOURCE_DIR@/docs/README.md
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to source browsing
+#---------------------------------------------------------------------------
+
+VERBATIM_HEADERS       = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the alphabetical class index
+#---------------------------------------------------------------------------
+
+ALPHABETICAL_INDEX     = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the HTML output
+#---------------------------------------------------------------------------
+
+GENERATE_HTML          = YES
+HTML_FOOTER            = footer.html
+GENERATE_TREEVIEW      = YES
+HTML_EXTRA_STYLESHEET  = @AWESOME_CSS_DIR@/doxygen-awesome.css \
+                         @AWESOME_CSS_DIR@/doxygen-awesome-sidebar-only.css \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/result-library.css
+HTML_EXTRA_FILES       = @CMAKE_CURRENT_SOURCE_DIR@/docs/deep-dive.png \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/deep-dive.mp3
+
+#---------------------------------------------------------------------------
+# Configuration options related to the LaTeX output
+#---------------------------------------------------------------------------
+
+GENERATE_LATEX         = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the RTF output
+#---------------------------------------------------------------------------
+
+GENERATE_RTF           = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the man page output
+#---------------------------------------------------------------------------
+
+GENERATE_MAN           = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the XML output
+#---------------------------------------------------------------------------
+
+GENERATE_XML           = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the DOCBOOK output
+#---------------------------------------------------------------------------
+
+GENERATE_DOCBOOK       = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options for the AutoGen Definitions output
+#---------------------------------------------------------------------------
+
+GENERATE_AUTOGEN_DEF   = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the Perl module output
+#---------------------------------------------------------------------------
+
+GENERATE_PERLMOD       = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to diagram generator tools
+#---------------------------------------------------------------------------
+
+HAVE_DOT               = NO
