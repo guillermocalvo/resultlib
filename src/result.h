@@ -17,7 +17,7 @@
 /**
  * A header-only C library to handle errors elegantly.
  *
- * ![](docs/result-logo.svg)
+ * <img src="result-logo.svg">
  *
  * This library consists of one header file only. All you need to do is copy
  * `result.h` into your project, and include it.

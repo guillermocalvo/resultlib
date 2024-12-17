@@ -1,6 +1,7 @@
 
-![][LOGO]
-
+<div style="justify-items: center">
+<img style="display: block" src="result-logo.svg">
+</div>
 
 # Introduction
 
@@ -200,12 +201,20 @@ Since it's a header-only library, there is no library code to link against.
 
 # Additional Info
 
-This library relies on modern C features such as [designated initializers][DESIGNATED_INITIALIZERS],
-[compound literals][COMPOUND_LITERALS], and [typeof][TYPEOF].
+## Releases
+
+This library adheres to [Semantic Versioning](https://semver.org/).
+
+Head over to GitHub for the [latest release][LATEST_RELEASE].
 
 ## Source Code
 
 The source code is [available on GitHub][SOURCE_CODE].
+
+## Compatibility
+
+Results rely on modern C features such as [designated initializers][DESIGNATED_INITIALIZERS],
+[compound literals][COMPOUND_LITERALS], and [typeof][TYPEOF].
 
 ## Author
 
@@ -250,14 +259,14 @@ See the License for the specific language governing permissions and limitations 
 [AUTHOR]:                       https://github.com/guillermocalvo/
 [COMPOUND_LITERALS]:            https://gcc.gnu.org/onlinedocs/gcc-3.3/gcc/Compound-Literals.html
 [DESIGNATED_INITIALIZERS]:      https://gcc.gnu.org/onlinedocs/gcc-3.3/gcc/Designated-Inits.html
-[EXAMPLE_EARLY_ATTEMPT]:        docs/early-attempt.png
-[EXAMPLE_EMBRACING_RESULTS]:    docs/embracing-results.png
-[EXAMPLE_USING_POINTERS]:       docs/using-pointers.png
-[EXAMPLE_USING_RESULTS]:        docs/using-results.png
+[EXAMPLE_EARLY_ATTEMPT]:        early-attempt.png
+[EXAMPLE_EMBRACING_RESULTS]:    embracing-results.png
+[EXAMPLE_USING_POINTERS]:       using-pointers.png
+[EXAMPLE_USING_RESULTS]:        using-results.png
 [GUILLERMO]:                    https://guillermo.dev/
 [GUILLERMO_IMAGE]:              https://guillermo.dev/assets/images/thumb.png
 [NETBOOKLM]:                    https://notebooklm.google.com/
-[LOGO]:                         docs/result-logo.svg
+[LATEST_RELEASE]:               https://github.com/guillermocalvo/resultlib/releases/latest
 [NULL_CHECKING]:                https://en.wikipedia.org/wiki/Nullable_type#Compared_with_null_pointers
 [OUTPUT_PARAMETERS]:            https://en.wikipedia.org/wiki/Parameter_(computer_programming)#Output_parameters
 [SENTINEL_VALUE]:               https://en.wikipedia.org/wiki/Sentinel_value
