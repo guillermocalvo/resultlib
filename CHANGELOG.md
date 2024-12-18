@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-No unreleased changes.
+- Refactor `RESULT_IF` macros so `result` doesn't have to be an lvalue.
+
+### Changed
+
+- Macro `RESULT_IF_SUCCESS`
+- Macro `RESULT_IF_FAILURE`
+- Macro `RESULT_IF_SUCCESS_OR_ELSE`
 
 
 ## [0.1.0]

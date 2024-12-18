@@ -316,8 +316,6 @@
 /**
  * Performs the supplied action with a successful result's value.
  *
- * @pre <strong>result</strong> MUST be an <em>lvalue</em>.
- *
  * @param result the result whose success value will be used.
  * @param action the function or macro to be applied to
  *   <strong>result</strong>'s success value.
@@ -326,16 +324,14 @@
  */
 #define RESULT_IF_SUCCESS(result, action)                                   \
   do {                                                                      \
-    (void) &(result);                                                       \
-    if (RESULT_HAS_SUCCESS(result)) {                                       \
-      (void) (action(RESULT_USE_SUCCESS(result)));                          \
+    typeof(result) _result = (result);                                      \
+    if (RESULT_HAS_SUCCESS(_result)) {                                      \
+      (void) (action(RESULT_USE_SUCCESS(_result)));                         \
     }                                                                       \
   } while(false)
 
 /**
  * Performs the supplied action with a failed result's value.
- *
- * @pre <strong>result</strong> MUST be an <em>lvalue</em>.
  *
  * @param result the result whose failure value will be used.
  * @param action the function or macro to be applied to
@@ -345,16 +341,14 @@
  */
 #define RESULT_IF_FAILURE(result, action)                                   \
   do {                                                                      \
-    (void) &(result);                                                       \
-    if (RESULT_HAS_FAILURE(result)) {                                       \
-      (void) (action(RESULT_USE_FAILURE(result)));                          \
+    typeof(result) _result = (result);                                      \
+    if (RESULT_HAS_FAILURE(_result)) {                                      \
+      (void) (action(RESULT_USE_FAILURE(_result)));                         \
     }                                                                       \
   } while(false)
 
 /**
  * Performs either of the supplied actions with a result's value.
- *
- * @pre <strong>result</strong> MUST be an <em>lvalue</em>.
  *
  * @param result the result whose value will be used.
  * @param success_action the function or macro to be applied to
@@ -366,11 +360,11 @@
  */
 #define RESULT_IF_SUCCESS_OR_ELSE(result, success_action, failure_action)   \
   do {                                                                      \
-    (void) &(result);                                                       \
-    if (RESULT_HAS_FAILURE(result)) {                                       \
-      (void) (failure_action(RESULT_USE_FAILURE(result)));                  \
+    typeof(result) _result = (result);                                      \
+    if (RESULT_HAS_FAILURE(_result)) {                                      \
+      (void) (failure_action(RESULT_USE_FAILURE(_result)));                 \
     } else {                                                                \
-      (void) (success_action(RESULT_USE_SUCCESS(result)));                  \
+      (void) (success_action(RESULT_USE_SUCCESS(_result)));                 \
     }                                                                       \
   } while(false)
 
