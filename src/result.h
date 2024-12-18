@@ -250,7 +250,7 @@
  */
 #define RESULT_GET_SUCCESS(result)                                          \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? NULL                                                                  \
     : &RESULT_USE_SUCCESS(result)                                           \
@@ -268,7 +268,7 @@
  */
 #define RESULT_GET_FAILURE(result)                                          \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? &RESULT_USE_FAILURE(result)                                           \
     : NULL                                                                  \
@@ -287,7 +287,7 @@
  */
 #define RESULT_OR_ELSE(result, other)                                       \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? (other)                                                               \
     : RESULT_USE_SUCCESS(result)                                            \
@@ -307,7 +307,7 @@
  */
 #define RESULT_OR_ELSE_MAP(result, failure_mapper)                          \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? failure_mapper(RESULT_USE_FAILURE(result))                            \
     : RESULT_USE_SUCCESS(result)                                            \
@@ -326,7 +326,7 @@
  */
 #define RESULT_IF_SUCCESS(result, action)                                   \
   do {                                                                      \
-    (void) ( &(result) );                                                   \
+    (void) &(result);                                                       \
     if (RESULT_HAS_SUCCESS(result)) {                                       \
       (void) (action(RESULT_USE_SUCCESS(result)));                          \
     }                                                                       \
@@ -345,7 +345,7 @@
  */
 #define RESULT_IF_FAILURE(result, action)                                   \
   do {                                                                      \
-    (void) ( &(result) );                                                   \
+    (void) &(result);                                                       \
     if (RESULT_HAS_FAILURE(result)) {                                       \
       (void) (action(RESULT_USE_FAILURE(result)));                          \
     }                                                                       \
@@ -366,7 +366,7 @@
  */
 #define RESULT_IF_SUCCESS_OR_ELSE(result, success_action, failure_action)   \
   do {                                                                      \
-    (void) ( &(result) );                                                   \
+    (void) &(result);                                                       \
     if (RESULT_HAS_FAILURE(result)) {                                       \
       (void) (failure_action(RESULT_USE_FAILURE(result)));                  \
     } else {                                                                \
@@ -390,13 +390,12 @@
  */
 #define RESULT_FILTER(result, is_acceptable, failure)                       \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
             || is_acceptable(RESULT_USE_SUCCESS(result))                    \
     ? (result)                                                              \
     : (typeof(result)) RESULT_FAILURE(failure)                              \
   )
-
 
 /**
  * Conditionally transforms a successful result into a failed one, mapping its
@@ -438,7 +437,7 @@
  */
 #define RESULT_RECOVER(result, is_recoverable, success)                     \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
             && is_recoverable(RESULT_USE_FAILURE(result))                   \
     ? (typeof(result)) RESULT_SUCCESS(success)                              \
@@ -484,7 +483,7 @@
  */
 #define RESULT_MAP_SUCCESS(result, success_mapper, result_type)             \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? (result_type)                                                         \
       RESULT_FAILURE(RESULT_USE_FAILURE(result))                            \
@@ -507,7 +506,7 @@
  */
 #define RESULT_MAP_FAILURE(result, failure_mapper, result_type)             \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? (result_type)                                                         \
       RESULT_FAILURE(failure_mapper(RESULT_USE_FAILURE(result)))            \
@@ -533,7 +532,7 @@
  */
 #define RESULT_MAP(result, success_mapper, failure_mapper, result_type)     \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? (result_type)                                                         \
       RESULT_FAILURE(failure_mapper(RESULT_USE_FAILURE(result)))            \
@@ -555,7 +554,7 @@
  */
 #define RESULT_FLAT_MAP_SUCCESS(result, success_mapper)                     \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? (typeof(success_mapper(RESULT_USE_SUCCESS(result))))                  \
       RESULT_FAILURE(RESULT_USE_FAILURE(result))                            \
@@ -576,7 +575,7 @@
  */
 #define RESULT_FLAT_MAP_FAILURE(result, failure_mapper)                     \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? failure_mapper(RESULT_USE_FAILURE(result))                            \
     : (typeof(failure_mapper(RESULT_USE_FAILURE(result))))                  \
@@ -598,7 +597,7 @@
  */
 #define RESULT_FLAT_MAP(result, success_mapper, failure_mapper)             \
   (                                                                         \
-    (void) ( &(result) ),                                                   \
+    (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
     ? failure_mapper(RESULT_USE_FAILURE(result))                            \
     : success_mapper(RESULT_USE_SUCCESS(result))                            \
@@ -642,7 +641,6 @@
  */
 #define RESULT_DEBUG_LINE(result)                                           \
   ( (result)._debug._line )
-
 
 #ifdef NDEBUG
 
