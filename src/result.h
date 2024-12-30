@@ -93,7 +93,7 @@
     struct {                                                                \
       const char * _func;                                                   \
       const char * _file;                                                   \
-      const int _line;                                                      \
+      int _line;                                                            \
     } _debug;                                                               \
   }
 

@@ -10,9 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 - Refactor `RESULT_IF` macros so `result` doesn't have to be an lvalue.
+- Remove `const` qualifier so result variables can be reassigned.
 
 ### Changed
 
+- Macro `RESULT_STRUCT_TAG`
 - Macro `RESULT_IF_SUCCESS`
 - Macro `RESULT_IF_FAILURE`
 - Macro `RESULT_IF_SUCCESS_OR_ELSE`
