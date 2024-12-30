@@ -20,6 +20,7 @@
 #include <result.h>
 #include "pet-store.h"
 
+RESULT_STRUCT(pet_status, pet_error);
 RESULT_STRUCT_TAG(Pet, const char *, RESULT_TAG(Pet, msg));
 RESULT_STRUCT_TAG(pet_status, const char *, RESULT_TAG(pet_status, msg));
 
@@ -29,24 +30,8 @@ static struct pet default_pet = { .id = 100, .name = "Default pet", .status = AV
 static int side_effect = 0;
 static pet_error last_error = OK;
 
-static const char * pet_error_message(pet_error code) {
-    switch (code) {
-        case OK: return "OK";
-        case PET_NOT_FOUND: return "Pet not found";
-        case PET_NOT_AVAILABLE: return "Pet not available";
-        case PET_ALREADY_SOLD: return "Pet already sold";
-        default: return "Unknown error";
-    }
-}
 
-static RESULT(Pet, pet_error) pet_buy(Pet pet) {
-    if (PET_STATUS(pet) != AVAILABLE) {
-        return (RESULT(Pet, pet_error)) RESULT_FAILURE(PET_NOT_AVAILABLE);
-    }
-    PET_STATUS(pet) = SOLD;
-    return (RESULT(Pet, pet_error)) RESULT_SUCCESS(pet);
-}
-
+// Returns the default pet if the supplied error code is PET_NOT_FOUND
 static RESULT(Pet, pet_error) pet_get_default(pet_error code) {
     if (code == PET_NOT_FOUND) {
         return (RESULT(Pet, pet_error)) RESULT_SUCCESS(&default_pet);
@@ -54,13 +39,64 @@ static RESULT(Pet, pet_error) pet_get_default(pet_error code) {
     return (RESULT(Pet, pet_error)) RESULT_FAILURE(code);
 }
 
+// Assigns a value to a global variable as a side effect
 static void set_side_effect(int value) {
     side_effect = value;
 }
 
+// Keeps track of the last error encountered
 static void log_error(pet_error error) {
     last_error = error;
 }
+
+#define find_pet find_pet_early_attempt
+
+#define get_pet_status get_pet_status_early_attempt
+/** [early_attempt] */
+// Returns the status of a pet by id
+pet_status get_pet_status(int id) {
+    Pet pet = find_pet(id);
+    return PET_STATUS(pet);
+}
+/** [early_attempt] */
+#undef get_pet_status
+
+#define get_pet_status get_pet_status_using_pointers
+/** [using_pointers] */
+// Returns the status of a pet by id
+pet_error get_pet_status(int id, pet_status * status) {
+    Pet pet = find_pet(id);
+    if (pet == NULL) {
+        return PET_NOT_FOUND;
+    }
+    *status = PET_STATUS(pet);
+    return OK;
+}
+/** [using_pointers] */
+#undef get_pet_status
+
+#define get_pet_status get_pet_status_using_results
+/** [using_results] */
+// Returns the status of a pet by id
+RESULT(pet_status, pet_error) get_pet_status(int id) {
+    Pet pet = find_pet(id);
+    if (pet == NULL) {
+        return (RESULT(pet_status, pet_error)) RESULT_FAILURE(PET_NOT_FOUND);
+    }
+    return (RESULT(pet_status, pet_error)) RESULT_SUCCESS(PET_STATUS(pet));
+}
+/** [using_results] */
+#undef get_pet_status
+
+#undef find_pet
+
+/** [embracing_results] */
+// Returns the status of a pet by id
+RESULT(pet_status, pet_error) get_pet_status(int id) {
+    RESULT(Pet, pet_error) result = find_pet(id);
+    return RESULT_MAP_SUCCESS(result, PET_STATUS, RESULT(pet_status, pet_error));
+}
+/** [embracing_results] */
 
 /**
  * Example snippets.
@@ -268,7 +304,7 @@ assert(RESULT_USE_SUCCESS(mapped) == SOLD);
 //! [result_flat_map_success]
 struct pet sold = { .status = SOLD };
 RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
-RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP_SUCCESS(result, pet_buy);
+RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP_SUCCESS(result, buy_pet);
 assert(RESULT_USE_FAILURE(mapped) == PET_NOT_AVAILABLE);
 //! [result_flat_map_success]
     }
@@ -285,10 +321,33 @@ assert(strcmp(PET_NAME(RESULT_USE_SUCCESS(mapped)), "Default pet") == 0);
 //! [result_flat_map]
 struct pet available = { .status = AVAILABLE };
 RESULT(Pet, pet_error) result = RESULT_SUCCESS(&available);
-RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP(result, pet_buy, pet_get_default);
+RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP(result, buy_pet, pet_get_default);
 assert(RESULT_USE_SUCCESS(mapped) == &available);
 assert(PET_STATUS(RESULT_USE_SUCCESS(mapped)) == SOLD);
 //! [result_flat_map]
+    }
+
+    {
+RESULT(pet_status, pet_error) result1 = get_pet_status_using_results(0);
+assert(RESULT_HAS_SUCCESS(result1));
+assert(RESULT_USE_SUCCESS(result1) == AVAILABLE);
+RESULT(pet_status, pet_error) result2 = get_pet_status_using_results(-1);
+assert(RESULT_HAS_FAILURE(result2));
+assert(RESULT_HAS_FAILURE(result2) == PET_NOT_FOUND);
+RESULT(pet_status, pet_error) result3 = get_pet_status(0);
+assert(RESULT_HAS_SUCCESS(result3));
+assert(RESULT_USE_SUCCESS(result3) == AVAILABLE);
+RESULT(pet_status, pet_error) result4 = get_pet_status(-1);
+assert(RESULT_HAS_FAILURE(result4));
+assert(RESULT_HAS_FAILURE(result4) == PET_NOT_FOUND);
+    }
+
+    {
+int pet_store_application(int argc, char * argv[]);
+assert(pet_store_application(1, (char * []) { "0" }) == 0);
+assert(pet_store_application(1, (char * []) { "1" }) != 0);
+assert(pet_store_application(1, (char * []) { "2" }) != 0);
+assert(pet_store_application(1, (char * []) { "3" }) != 0);
     }
 
     return 0;

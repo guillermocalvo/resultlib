@@ -83,15 +83,11 @@ foreach(TEST IN LISTS TESTS)
     set_property(TEST ${TEST} PROPERTY SKIP_RETURN_CODE 77)
 endforeach()
 
-set(EXAMPLES
-        example
-        pet-store
-)
-
-foreach(EXAMPLE IN LISTS EXAMPLES)
-    add_executable(${EXAMPLE} "examples/${EXAMPLE}.c")
-    set_target_properties(${EXAMPLE} PROPERTIES COMPILE_WARNING_AS_ERROR ON)
-    target_include_directories(${EXAMPLE} PUBLIC src)
-    add_test(NAME ${EXAMPLE} COMMAND $<TARGET_FILE:${EXAMPLE}>)
-    set_property(TEST ${EXAMPLE} PROPERTY SKIP_RETURN_CODE 77)
-endforeach()
+add_executable(examples
+        "examples/example.c"
+        "examples/pet-store.c"
+        "examples/application.c")
+set_target_properties(examples PROPERTIES COMPILE_WARNING_AS_ERROR ON)
+target_include_directories(examples PUBLIC src)
+add_test(NAME examples COMMAND $<TARGET_FILE:examples>)
+set_property(TEST examples PROPERTY SKIP_RETURN_CODE 77)

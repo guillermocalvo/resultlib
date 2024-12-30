@@ -37,7 +37,9 @@ WARN_AS_ERROR          = YES
 #---------------------------------------------------------------------------
 
 INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/src/ \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/README.md
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/README.md \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/examples.md \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/license.md
 FILE_PATTERNS          = *.c \
                          *.h \
                          *.md
@@ -65,7 +67,8 @@ ALPHABETICAL_INDEX     = NO
 #---------------------------------------------------------------------------
 
 GENERATE_HTML          = YES
-HTML_FOOTER            = footer.html
+HTML_FOOTER            = @CMAKE_CURRENT_SOURCE_DIR@/docs/footer.html
+DISABLE_INDEX          = NO
 GENERATE_TREEVIEW      = YES
 HTML_EXTRA_STYLESHEET  = @AWESOME_CSS_DIR@/doxygen-awesome.css \
                          @AWESOME_CSS_DIR@/doxygen-awesome-sidebar-only.css \
@@ -120,6 +123,13 @@ GENERATE_AUTOGEN_DEF   = NO
 #---------------------------------------------------------------------------
 
 GENERATE_PERLMOD       = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the preprocessor
+#---------------------------------------------------------------------------
+
+PREDEFINED             = __bool_true_false_are_defined
 
 
 #---------------------------------------------------------------------------
