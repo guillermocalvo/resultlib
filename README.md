@@ -110,7 +110,7 @@ With Results, handling success and failure feels natural, leaving you free to fo
 
 ## Author
 
-Copyright 2024 [Guillermo Calvo][AUTHOR].
+Copyright 2025 [Guillermo Calvo][AUTHOR].
 
 [![][GUILLERMO_IMAGE]][GUILLERMO]
 
