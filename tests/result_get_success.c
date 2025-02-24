@@ -18,7 +18,8 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
 
 /**

@@ -193,7 +193,7 @@
  * @see RESULT_HAS_FAILURE
  */
 #define RESULT_HAS_SUCCESS(result)                                          \
-  ( !(result)._failed )
+  (!(result)._failed)
 
 /**
  * Checks if a result contains a failure value.
@@ -204,7 +204,7 @@
  * @see RESULT_HAS_SUCCESS
  */
 #define RESULT_HAS_FAILURE(result)                                          \
-  ( (result)._failed )
+  ((result)._failed)
 
 /**
  * Returns a result's success value.
@@ -221,7 +221,7 @@
  * @see RESULT_USE_FAILURE
  */
 #define RESULT_USE_SUCCESS(result)                                          \
-  ( (result)._value._success )
+  ((result)._value._success)
 
 /**
  * Returns a result's failure value.
@@ -238,7 +238,7 @@
  * @see RESULT_USE_FAILURE
  */
 #define RESULT_USE_FAILURE(result)                                          \
-  ( (result)._value._failure )
+  ((result)._value._failure)
 
 /**
  * Returns a result's success value as a possibly-null pointer.
@@ -610,7 +610,7 @@
  * @see RESULT_DEBUG_LINE
  */
 #define RESULT_DEBUG_FUNC(result)                                           \
-  ( (result)._debug._func )
+  ((result)._debug._func)
 
 /**
  * Returns the source file name where a result was created.
@@ -623,7 +623,7 @@
  * @see RESULT_DEBUG_LINE
  */
 #define RESULT_DEBUG_FILE(result)                                           \
-  ( (result)._debug._file )
+  ((result)._debug._file)
 
 /**
  * Returns the source line number where a result was created.
@@ -636,7 +636,7 @@
  * @see RESULT_DEBUG_FILE
  */
 #define RESULT_DEBUG_LINE(result)                                           \
-  ( (result)._debug._line )
+  ((result)._debug._line)
 
 #ifdef NDEBUG
 
@@ -684,7 +684,9 @@
 #define RESULT_SUCCESS(success)                                             \
   {                                                                         \
     ._failed = false,                                                       \
-    ._value = { ._success = success },                                      \
+    ._value = {                                                             \
+      ._success = success                                                   \
+    }                                                                       \
   }
 
 #undef RESULT_FAILURE
@@ -699,7 +701,9 @@
 #define RESULT_FAILURE(failure)                                             \
   {                                                                         \
     ._failed = true,                                                        \
-    ._value = { ._failure = failure },                                      \
+    ._value = {                                                             \
+      ._failure = failure                                                   \
+    }                                                                       \
   }
 
 #undef RESULT_DEBUG_FUNC

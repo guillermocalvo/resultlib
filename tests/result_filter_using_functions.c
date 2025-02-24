@@ -17,7 +17,8 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
 
 static bool is_within_range(int x) {

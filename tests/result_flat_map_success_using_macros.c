@@ -17,9 +17,15 @@
 #include <result.h>
 #include "test.h"
 
-typedef struct { int x; int y; } point;
-typedef const char * text;
+typedef struct {
+    int x;
+    int y;
+} point;
+
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
+
 RESULT_STRUCT(point, text);
 
 #define POINT(x, y) \

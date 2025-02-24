@@ -17,8 +17,10 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, char);
+
 RESULT_STRUCT(int, text);
 
 #define first_char(s) \

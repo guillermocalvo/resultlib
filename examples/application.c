@@ -35,7 +35,7 @@ static void print_error(const pet_error error) {
 }
 
 // Pet store application
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[]) {
   int pet_id;
   RESULT(Pet, pet_error) result;
 

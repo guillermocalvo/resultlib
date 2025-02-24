@@ -21,12 +21,14 @@
 #include "pet-store.h"
 
 RESULT_STRUCT(pet_status, pet_error);
+
 RESULT_STRUCT_TAG(Pet, const char *, RESULT_TAG(Pet, msg));
+
 RESULT_STRUCT_TAG(pet_status, const char *, RESULT_TAG(pet_status, msg));
 
 typedef int IMPLEMENTATION;
 
-static struct pet default_pet = { .id = 100, .name = "Default pet", .status = AVAILABLE };
+static struct pet default_pet = {.id = 100, .name = "Default pet", .status = AVAILABLE};
 static int side_effect = 0;
 static pet_error last_error = OK;
 
@@ -64,7 +66,7 @@ pet_status get_pet_status(int id) {
 #define get_pet_status get_pet_status_using_pointers
 /** [using_pointers] */
 // Returns the status of a pet by id
-pet_error get_pet_status(int id, pet_status * status) {
+pet_error get_pet_status(int id, pet_status *status) {
     Pet pet = find_pet(id);
     if (pet == NULL) {
         return PET_NOT_FOUND;
@@ -166,7 +168,7 @@ assert(value == PET_NOT_FOUND);
     {
 //! [result_get_success]
 RESULT(pet_status, pet_error) result = RESULT_SUCCESS(AVAILABLE);
-pet_status * value = RESULT_GET_SUCCESS(result);
+pet_status *value = RESULT_GET_SUCCESS(result);
 assert(*value == AVAILABLE);
 //! [result_get_success]
     }
@@ -174,7 +176,7 @@ assert(*value == AVAILABLE);
     {
 //! [result_get_failure]
 RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_NOT_FOUND);
-pet_error * value = RESULT_GET_FAILURE(result);
+pet_error *value = RESULT_GET_FAILURE(result);
 assert(*value == PET_NOT_FOUND);
 //! [result_get_failure]
     }
@@ -233,7 +235,7 @@ assert(last_error == PET_NOT_FOUND);
 
     {
 //! [result_filter]
-struct pet sold = { .status = SOLD };
+struct pet sold = {.status = SOLD};
 RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
 RESULT(Pet, pet_error) filtered = RESULT_FILTER(result, is_available, PET_NOT_AVAILABLE);
 assert(RESULT_USE_FAILURE(filtered) == PET_NOT_AVAILABLE);
@@ -243,7 +245,7 @@ assert(RESULT_USE_FAILURE(filtered) == PET_NOT_AVAILABLE);
     {
 //! [result_filter_map]
 #define PET_TO_ERROR(pet) (PET_STATUS(pet) == SOLD ? PET_ALREADY_SOLD : PET_NOT_AVAILABLE)
-struct pet sold = { .status = SOLD };
+struct pet sold = {.status = SOLD};
 RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
 RESULT(Pet, pet_error) filtered = RESULT_FILTER_MAP(result, is_available, PET_TO_ERROR);
 assert(RESULT_USE_FAILURE(filtered) == PET_ALREADY_SOLD);
@@ -276,7 +278,7 @@ assert(RESULT_USE_SUCCESS(recovered) == PENDING);
 
     {
 //! [result_map_success]
-struct pet sold = { .status = SOLD };
+struct pet sold = {.status = SOLD};
 RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
 RESULT(pet_status, pet_error) mapped = RESULT_MAP_SUCCESS(result, PET_STATUS, typeof(mapped));
 assert(RESULT_USE_SUCCESS(mapped) == SOLD);
@@ -293,7 +295,7 @@ assert(strcmp(RESULT_USE_FAILURE(mapped), "Pet not available") == 0);
 
     {
 //! [result_map]
-struct pet sold = { .status = SOLD };
+struct pet sold = {.status = SOLD};
 RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
 RESULT(pet_status, msg) mapped = RESULT_MAP(result, PET_STATUS, pet_error_message, typeof(mapped));
 assert(RESULT_USE_SUCCESS(mapped) == SOLD);
@@ -302,7 +304,7 @@ assert(RESULT_USE_SUCCESS(mapped) == SOLD);
 
     {
 //! [result_flat_map_success]
-struct pet sold = { .status = SOLD };
+struct pet sold = {.status = SOLD};
 RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
 RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP_SUCCESS(result, buy_pet);
 assert(RESULT_USE_FAILURE(mapped) == PET_NOT_AVAILABLE);
@@ -319,7 +321,7 @@ assert(strcmp(PET_NAME(RESULT_USE_SUCCESS(mapped)), "Default pet") == 0);
 
     {
 //! [result_flat_map]
-struct pet available = { .status = AVAILABLE };
+struct pet available = {.status = AVAILABLE};
 RESULT(Pet, pet_error) result = RESULT_SUCCESS(&available);
 RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP(result, buy_pet, pet_get_default);
 assert(RESULT_USE_SUCCESS(mapped) == &available);
@@ -328,26 +330,30 @@ assert(PET_STATUS(RESULT_USE_SUCCESS(mapped)) == SOLD);
     }
 
     {
-RESULT(pet_status, pet_error) result1 = get_pet_status_using_results(0);
-assert(RESULT_HAS_SUCCESS(result1));
-assert(RESULT_USE_SUCCESS(result1) == AVAILABLE);
-RESULT(pet_status, pet_error) result2 = get_pet_status_using_results(-1);
-assert(RESULT_HAS_FAILURE(result2));
-assert(RESULT_HAS_FAILURE(result2) == PET_NOT_FOUND);
-RESULT(pet_status, pet_error) result3 = get_pet_status(0);
-assert(RESULT_HAS_SUCCESS(result3));
-assert(RESULT_USE_SUCCESS(result3) == AVAILABLE);
-RESULT(pet_status, pet_error) result4 = get_pet_status(-1);
-assert(RESULT_HAS_FAILURE(result4));
-assert(RESULT_HAS_FAILURE(result4) == PET_NOT_FOUND);
+        RESULT(pet_status, pet_error) result1 = get_pet_status_using_results(0);
+        assert(RESULT_HAS_SUCCESS(result1));
+        assert(RESULT_USE_SUCCESS(result1) == AVAILABLE);
+        (void) result1;
+        RESULT(pet_status, pet_error) result2 = get_pet_status_using_results(-1);
+        assert(RESULT_HAS_FAILURE(result2));
+        assert(RESULT_HAS_FAILURE(result2) == PET_NOT_FOUND);
+        (void) result2;
+        RESULT(pet_status, pet_error) result3 = get_pet_status(0);
+        assert(RESULT_HAS_SUCCESS(result3));
+        assert(RESULT_USE_SUCCESS(result3) == AVAILABLE);
+        (void) result3;
+        RESULT(pet_status, pet_error) result4 = get_pet_status(-1);
+        assert(RESULT_HAS_FAILURE(result4));
+        assert(RESULT_HAS_FAILURE(result4) == PET_NOT_FOUND);
+        (void) result4;
     }
 
     {
-int pet_store_application(int argc, char * argv[]);
-assert(pet_store_application(1, (char * []) { "0" }) == 0);
-assert(pet_store_application(1, (char * []) { "1" }) != 0);
-assert(pet_store_application(1, (char * []) { "2" }) != 0);
-assert(pet_store_application(1, (char * []) { "3" }) != 0);
+        int pet_store_application(int argc, char *argv[]);
+        assert(pet_store_application(1, (char * []) { "0" }) == 0);
+        assert(pet_store_application(1, (char * []) { "1" }) != 0);
+        assert(pet_store_application(1, (char * []) { "2" }) != 0);
+        assert(pet_store_application(1, (char * []) { "3" }) != 0);
     }
 
     return 0;

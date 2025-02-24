@@ -17,11 +17,13 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, char);
+
 RESULT_STRUCT(int, text);
 
-static RESULT(int, char) first_char(const char * s) {
+static RESULT(int, char) first_char(const char *s) {
     return *s == 'S' ? (RESULT(int, char)) RESULT_SUCCESS(1) : (RESULT(int, char)) RESULT_FAILURE(*s);
 }
 

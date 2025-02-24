@@ -17,14 +17,15 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
 
 static bool is_within_range(int x) {
     return x >= 1 && x <= 10;
 }
 
-static const char * to_failure(int x) {
+static const char *to_failure(int x) {
     return x < 1 ? "Too small" : "Too big";
 }
 

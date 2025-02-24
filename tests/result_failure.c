@@ -17,19 +17,21 @@
 #include <result.h>
 #include "test.h"
 
+RESULT_STRUCT(int, char);
+
 /**
  * Tests `RESULT_FAILURE`.
  */
 int main() {
     // Given
-    const RESULT_STRUCT(int, char) result = RESULT_FAILURE('A');
+    const RESULT(int, char) result = RESULT_FAILURE('A');
     // Then
     TEST_ASSERT_TRUE(result._failed);
     TEST_ASSERT_CHAR_EQUALS(result._value._failure, 'A');
 #ifndef NDEBUG
     TEST_ASSERT_STR_EQUALS(result._debug._func, "main");
     TEST_ASSERT_STR_CONTAINS(result._debug._file, "result_failure.c");
-    TEST_ASSERT_INT_EQUALS(result._debug._line, 25);
+    TEST_ASSERT_INT_EQUALS(result._debug._line, 27);
 #endif
     TEST_PASS;
 }

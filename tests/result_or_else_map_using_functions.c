@@ -17,10 +17,11 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
 
-static int to_number(const char * s) {
+static int to_number(const char *s) {
     return *s == 'E' ? 1 : -1;
 }
 

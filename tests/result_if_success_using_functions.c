@@ -17,17 +17,20 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
 
 static bool on_success1_executed = false;
 static bool on_success2_executed = false;
 
 static void on_success1(int _) {
+    (void) _;
     on_success1_executed = true;
 }
 
 static void on_success2(int _) {
+    (void) _;
     on_success2_executed = true;
 }
 

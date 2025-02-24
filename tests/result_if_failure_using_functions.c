@@ -17,17 +17,20 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
 
 static bool on_failure1_executed = false;
 static bool on_failure2_executed = false;
 
-static void on_failure1(const char * _) {
+static void on_failure1(const char *_) {
+    (void) _;
     on_failure1_executed = true;
 }
 
-static void on_failure2(const char * _) {
+static void on_failure2(const char *_) {
+    (void) _;
     on_failure2_executed = true;
 }
 

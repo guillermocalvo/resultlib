@@ -17,9 +17,15 @@
 #include <result.h>
 #include "test.h"
 
-typedef struct { int x; int y; } point;
-typedef const char * text;
+typedef struct {
+    int x;
+    int y;
+} point;
+
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
+
 RESULT_STRUCT(point, text);
 
 #define point_get_x(p) \
@@ -30,7 +36,7 @@ RESULT_STRUCT(point, text);
  */
 int main() {
     // Given
-    const point p = { 123, 456 };
+    const point p = {123, 456};
     const RESULT(point, text) success = RESULT_SUCCESS(p);
     const RESULT(point, text) failure = RESULT_FAILURE("Failure");
     // When

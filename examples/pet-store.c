@@ -21,14 +21,14 @@
 //! [array]
 // Available pets in the store
 static struct pet pets[] = {
-  { .id = 0, .name = "Rocky", .status = AVAILABLE },
-  { .id = 1, .name = "Garfield", .status = PENDING },
-  { .id = 2, .name = "Rantanplan", .status = SOLD }
+  {.id = 0, .name = "Rocky", .status = AVAILABLE},
+  {.id = 1, .name = "Garfield", .status = PENDING},
+  {.id = 2, .name = "Rantanplan", .status = SOLD}
 };
 //! [array]
 
 // Returns a textual description of the supplied error code
-const char * pet_error_message(pet_error code) {
+const char *pet_error_message(pet_error code) {
   switch (code) {
     case OK: return "OK";
     case PET_NOT_FOUND: return "Pet not found";
@@ -39,7 +39,7 @@ const char * pet_error_message(pet_error code) {
 }
 
 // Returns a textual representation of the supplied status
-const char * pet_status_name(pet_status status) {
+const char *pet_status_name(pet_status status) {
   switch (status) {
     case AVAILABLE: return "Available";
     case PENDING: return "Pending";
