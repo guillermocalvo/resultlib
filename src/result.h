@@ -155,7 +155,7 @@
   {                                                                         \
     ._failed = false,                                                       \
     ._value = {                                                             \
-      ._success = success                                                   \
+      ._success = (success)                                                 \
     },                                                                      \
     ._debug = {                                                             \
       ._func = __func__,                                                    \
@@ -175,7 +175,7 @@
 {                                                                           \
   ._failed = true,                                                          \
   ._value = {                                                               \
-    ._failure = failure                                                     \
+    ._failure = (failure)                                                   \
   },                                                                        \
   ._debug = {                                                               \
     ._func = __func__,                                                      \
@@ -311,7 +311,7 @@
   (                                                                         \
     (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
-    ? failure_mapper(RESULT_USE_FAILURE(result))                            \
+    ? (failure_mapper(RESULT_USE_FAILURE(result)))                          \
     : RESULT_USE_SUCCESS(result)                                            \
   )
 
@@ -388,7 +388,7 @@
   (                                                                         \
     (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
-            || is_acceptable(RESULT_USE_SUCCESS(result))                    \
+            || (is_acceptable(RESULT_USE_SUCCESS(result)))                  \
     ? (result)                                                              \
     : (typeof(result)) RESULT_FAILURE(failure)                              \
   )
@@ -414,7 +414,7 @@
   RESULT_FILTER(                                                            \
     result,                                                                 \
     is_acceptable,                                                          \
-    success_mapper(RESULT_USE_SUCCESS(result))                              \
+    (success_mapper(RESULT_USE_SUCCESS(result)))                            \
   )
 
 /**
@@ -435,7 +435,7 @@
   (                                                                         \
     (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
-            && is_recoverable(RESULT_USE_FAILURE(result))                   \
+            && (is_recoverable(RESULT_USE_FAILURE(result)))                 \
     ? (typeof(result)) RESULT_SUCCESS(success)                              \
     : (result)                                                              \
   )
@@ -461,7 +461,7 @@
   RESULT_RECOVER(                                                           \
     result,                                                                 \
     is_recoverable,                                                         \
-    failure_mapper(RESULT_USE_FAILURE(result))                              \
+    (failure_mapper(RESULT_USE_FAILURE(result)))                            \
   )
 
 /**
@@ -554,7 +554,7 @@
     RESULT_HAS_FAILURE(result)                                              \
     ? (typeof(success_mapper(RESULT_USE_SUCCESS(result))))                  \
       RESULT_FAILURE(RESULT_USE_FAILURE(result))                            \
-    : success_mapper(RESULT_USE_SUCCESS(result))                            \
+    : (success_mapper(RESULT_USE_SUCCESS(result)))                          \
   )
 
 /**
@@ -573,7 +573,7 @@
   (                                                                         \
     (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
-    ? failure_mapper(RESULT_USE_FAILURE(result))                            \
+    ? (failure_mapper(RESULT_USE_FAILURE(result)))                          \
     : (typeof(failure_mapper(RESULT_USE_FAILURE(result))))                  \
       RESULT_SUCCESS(RESULT_USE_SUCCESS(result))                            \
   )
@@ -595,8 +595,8 @@
   (                                                                         \
     (void) &(result),                                                       \
     RESULT_HAS_FAILURE(result)                                              \
-    ? failure_mapper(RESULT_USE_FAILURE(result))                            \
-    : success_mapper(RESULT_USE_SUCCESS(result))                            \
+    ? (failure_mapper(RESULT_USE_FAILURE(result)))                          \
+    : (success_mapper(RESULT_USE_SUCCESS(result)))                          \
   )
 
 /**
@@ -685,7 +685,7 @@
   {                                                                         \
     ._failed = false,                                                       \
     ._value = {                                                             \
-      ._success = success                                                   \
+      ._success = (success)                                                 \
     }                                                                       \
   }
 
@@ -702,7 +702,7 @@
   {                                                                         \
     ._failed = true,                                                        \
     ._value = {                                                             \
-      ._failure = failure                                                   \
+      ._failure = (failure)                                                 \
     }                                                                       \
   }
 
