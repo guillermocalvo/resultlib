@@ -43,6 +43,8 @@
  */
 #define RESULT_VERSION 0
 
+#include <stddef.h> /* NULL */
+
 #ifndef __bool_true_false_are_defined
 #include <stdbool.h>
 #endif
@@ -600,10 +602,10 @@
 /**
  * Returns the function name where a result was created.
  *
- * @pre This macro is only available if <tt>NDEBUG</tt> is not defined.
+ * @param result The result to retrieve the debug information from.
+ * @return The function name where <strong>result</strong> was created or
+ *   <tt>NULL</tt> if <tt>NDEBUG</tt> is defined.
  *
- * @param result the result to retrieve the debug information from.
- * @return the function name where <strong>result</strong> was created.
  * @see RESULT_DEBUG_FILE
  * @see RESULT_DEBUG_LINE
  */
@@ -613,10 +615,10 @@
 /**
  * Returns the source file name where a result was created.
  *
- * @pre This macro is only available if <tt>NDEBUG</tt> is not defined.
+ * @param result The result to retrieve the debug information from.
+ * @return The source file name where <strong>result</strong> was created or
+ *   <tt>NULL</tt> if <tt>NDEBUG</tt> is defined.
  *
- * @param result the result to retrieve the debug information from.
- * @return the source file name where <strong>result</strong> was created.
  * @see RESULT_DEBUG_FUNC
  * @see RESULT_DEBUG_LINE
  */
@@ -626,10 +628,10 @@
 /**
  * Returns the source line number where a result was created.
  *
- * @pre This macro is only available if <tt>NDEBUG</tt> is not defined.
+ * @param result The result to retrieve the debug information from.
+ * @return The source line number where <strong>result</strong> was created or
+ *   zero if <tt>NDEBUG</tt> is defined.
  *
- * @param result the result to retrieve the debug information from.
- * @return the source line number where <strong>result</strong> was created.
  * @see RESULT_DEBUG_FUNC
  * @see RESULT_DEBUG_FILE
  */
@@ -701,8 +703,49 @@
   }
 
 #undef RESULT_DEBUG_FUNC
+
+/**
+ * Returns the function name where a result was created.
+ *
+ * @param result The result to retrieve the debug information from.
+ * @return The function name where <strong>result</strong> was created or
+ *   <tt>NULL</tt> if <tt>NDEBUG</tt> is defined.
+ *
+ * @see RESULT_DEBUG_FILE
+ * @see RESULT_DEBUG_LINE
+ */
+#define RESULT_DEBUG_FUNC(result)                                           \
+  (NULL)
+
 #undef RESULT_DEBUG_FILE
+
+/**
+ * Returns the source file name where a result was created.
+ *
+ * @param result The result to retrieve the debug information from.
+ * @return The source file name where <strong>result</strong> was created or
+ *   <tt>NULL</tt> if <tt>NDEBUG</tt> is defined.
+ *
+ * @see RESULT_DEBUG_FUNC
+ * @see RESULT_DEBUG_LINE
+ */
+#define RESULT_DEBUG_FILE(result)                                           \
+  (NULL)
+
 #undef RESULT_DEBUG_LINE
+
+/**
+ * Returns the source line number where a result was created.
+ *
+ * @param result The result to retrieve the debug information from.
+ * @return The source line number where <strong>result</strong> was created or
+ *   zero if <tt>NDEBUG</tt> is defined.
+ *
+ * @see RESULT_DEBUG_FUNC
+ * @see RESULT_DEBUG_FILE
+ */
+#define RESULT_DEBUG_LINE(result)                                           \
+  (0)
 
 #endif
 

@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Refactor `RESULT_IF` macros so `result` doesn't have to be an lvalue.
 - Remove `const` qualifier so result variables can be reassigned.
+- Define debug macros even if `NDEBUG` is defined.
+- Include `stddef.h` for `NULL`.
 
 ### Changed
 
@@ -18,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Macro `RESULT_IF_SUCCESS`
 - Macro `RESULT_IF_FAILURE`
 - Macro `RESULT_IF_SUCCESS_OR_ELSE`
+- Macro `RESULT_DEBUG_FUNC`
+- Macro `RESULT_DEBUG_FILE`
+- Macro `RESULT_DEBUG_LINE`
 
 
 ## [0.1.0]

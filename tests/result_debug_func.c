@@ -21,16 +21,19 @@
  * Tests `RESULT_DEBUG_FUNC`.
  */
 int main() {
-#ifdef NDEBUG
-    TEST_SKIP("NDEBUG is defined");
-#else
     // Given
     RESULT_STRUCT(int, char);
     const RESULT(int, char) success = RESULT_SUCCESS(512);
     const RESULT(int, char) failure = RESULT_FAILURE('A');
     // Then
+#ifdef NDEBUG
+    (void) success;
+    (void) failure;
+    TEST_ASSERT_NULL(RESULT_DEBUG_FUNC(success));
+    TEST_ASSERT_NULL(RESULT_DEBUG_FUNC(failure));
+#else
     TEST_ASSERT_STR_EQUALS(RESULT_DEBUG_FUNC(success), "main");
     TEST_ASSERT_STR_EQUALS(RESULT_DEBUG_FUNC(failure), "main");
-    TEST_PASS;
 #endif
+    TEST_PASS;
 }
