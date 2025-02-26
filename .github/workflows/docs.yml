@@ -13,7 +13,7 @@ on:
         type: string
         default: 'latest'
       publish:
-        description: Publish report to GitHub Pages
+        description: Publish docs to GitHub Pages
         required: true
         type: boolean
         default: true
