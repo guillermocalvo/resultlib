@@ -4,7 +4,7 @@
 #---------------------------------------------------------------------------
 
 PROJECT_NAME           = "Result Library"
-PROJECT_NUMBER         = "0.1"
+PROJECT_NUMBER         = "1.0"
 PROJECT_BRIEF          = "Elegant error handling in C"
 PROJECT_LOGO           = ./docs/logo.svg
 PROJECT_ICON           = ./docs/icon.svg

@@ -7,7 +7,7 @@ AC_PREREQ([2.68])
 
 
 # Initialize package
-AC_INIT([result], [0.1.0], [result@guillermo.dev], [result], [https://github.com/guillermocalvo/resultlib/])
+AC_INIT([result], [1.0.0], [result@guillermo.dev], [result], [https://github.com/guillermocalvo/resultlib/])
 
 
 # Information on the package

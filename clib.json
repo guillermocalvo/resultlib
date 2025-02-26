@@ -1,6 +1,6 @@
 {
   "name":           "resultlib",
-  "version":        "0.1.0",
+  "version":        "1.0.0",
   "description":    "Elegant error handling in C",
   "repo":           "guillermocalvo/resultlib",
   "license":        "Apache-2.0",

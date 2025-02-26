@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.29)
 project(resultlib C)
 
 set(CMAKE_C_STANDARD 23)
-set(RESULT_VERSION "0.1")
+set(RESULT_VERSION "1.0")
 
 include(FetchContent)
 FetchContent_Declare(
