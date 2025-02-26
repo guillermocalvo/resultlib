@@ -151,3 +151,17 @@ bin_check_result_debug_func_SOURCES                         = tests/result_debug
 bin_check_result_debug_file_SOURCES                         = tests/result_debug_file.c
 bin_check_result_debug_line_SOURCES                         = tests/result_debug_line.c
 bin_check_examples_SOURCES                                  = examples/example.c examples/pet-store.c examples/application.c
+
+
+# Generate documentation
+
+docs: docs/html/index.html
+
+docs/html/index.html: docs/Doxyfile docs/doxygen-awesome.css docs/doxygen-awesome-sidebar-only.css
+	doxygen docs/Doxyfile
+
+docs/doxygen-awesome.css:
+	wget --verbose --output-document docs/doxygen-awesome.css https://github.com/jothepro/doxygen-awesome-css/raw/refs/heads/main/doxygen-awesome.css
+
+docs/doxygen-awesome-sidebar-only.css:
+	wget --verbose --output-document docs/doxygen-awesome-sidebar-only.css https://github.com/jothepro/doxygen-awesome-css/raw/refs/heads/main/doxygen-awesome-sidebar-only.css

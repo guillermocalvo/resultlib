@@ -22,10 +22,10 @@
 
 //! [types]
 // Pet status in the store
-typedef enum pet_status { AVAILABLE, PENDING, SOLD } pet_status;
+typedef enum pet_status {AVAILABLE, PENDING, SOLD} pet_status;
 
 // Represents a pet
-typedef struct pet { int id; const char * name; pet_status status; } * Pet;
+typedef struct pet {int id; const char *name; pet_status status;} *Pet;
 
 // Convenience macros
 #define PET_ID(pet) (pet)->id
@@ -33,15 +33,15 @@ typedef struct pet { int id; const char * name; pet_status status; } * Pet;
 #define PET_STATUS(pet) (pet)->status
 
 // Pet error codes
-typedef enum pet_error { OK, PET_NOT_FOUND, PET_NOT_AVAILABLE, PET_ALREADY_SOLD } pet_error;
+typedef enum pet_error {OK, PET_NOT_FOUND, PET_NOT_AVAILABLE, PET_ALREADY_SOLD} pet_error;
 //! [types]
 
 // Result type used by the pet store
 RESULT_STRUCT(Pet, pet_error);
 
 // Pet store API
-const char * pet_error_message(pet_error code);
-const char * pet_status_name(pet_status status);
+const char *pet_error_message(pet_error code);
+const char *pet_status_name(pet_status status);
 RESULT(Pet, pet_error) find_pet(int pet_id);
 RESULT(Pet, pet_error) buy_pet(Pet pet);
 

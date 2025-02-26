@@ -4,11 +4,11 @@
 #---------------------------------------------------------------------------
 
 PROJECT_NAME           = "Result Library"
-PROJECT_NUMBER         = "@RESULT_VERSION@"
+PROJECT_NUMBER         = "0.1"
 PROJECT_BRIEF          = "Elegant error handling in C"
-PROJECT_LOGO           = @CMAKE_CURRENT_SOURCE_DIR@/docs/logo.svg
-PROJECT_ICON           = @CMAKE_CURRENT_SOURCE_DIR@/docs/icon.svg
-OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/doxygen/
+PROJECT_LOGO           = ./docs/logo.svg
+PROJECT_ICON           = ./docs/icon.svg
+OUTPUT_DIRECTORY       = ./docs
 CREATE_SUBDIRS         = NO
 FULL_PATH_NAMES        = NO
 JAVADOC_AUTOBRIEF      = YES
@@ -37,16 +37,16 @@ WARN_AS_ERROR          = YES
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
 
-INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/src/ \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/README.md \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/examples.md \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/license.md
+INPUT                  = ./src/ \
+                         ./docs/README.md \
+                         ./docs/examples.md \
+                         ./docs/license.md
 FILE_PATTERNS          = *.c \
                          *.h \
                          *.md
-EXAMPLE_PATH           = @CMAKE_CURRENT_SOURCE_DIR@/examples/
-IMAGE_PATH             = @CMAKE_CURRENT_SOURCE_DIR@/docs
-USE_MDFILE_AS_MAINPAGE = @CMAKE_CURRENT_SOURCE_DIR@/docs/README.md
+EXAMPLE_PATH           = ./examples/
+IMAGE_PATH             = ./docs
+USE_MDFILE_AS_MAINPAGE = ./docs/README.md
 
 
 #---------------------------------------------------------------------------
@@ -68,25 +68,25 @@ ALPHABETICAL_INDEX     = NO
 #---------------------------------------------------------------------------
 
 GENERATE_HTML          = YES
-HTML_FOOTER            = @CMAKE_CURRENT_SOURCE_DIR@/docs/footer.html
+HTML_FOOTER            = ./docs/footer.html
 DISABLE_INDEX          = NO
 GENERATE_TREEVIEW      = YES
-HTML_EXTRA_STYLESHEET  = @AWESOME_CSS_DIR@/doxygen-awesome.css \
-                         @AWESOME_CSS_DIR@/doxygen-awesome-sidebar-only.css \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/result-library.css
-HTML_EXTRA_FILES       = @CMAKE_CURRENT_SOURCE_DIR@/docs/deep-dive.png \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/deep-dive.mp3 \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/alert-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/bug-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/check-circle-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/check-circle-fill-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/checkbox-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/eye-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/info-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/light-bulb-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/report-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/stop-16.svg \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/trash-16.svg
+HTML_EXTRA_STYLESHEET  = ./docs/doxygen-awesome.css \
+                         ./docs/doxygen-awesome-sidebar-only.css \
+                         ./docs/result-library.css
+HTML_EXTRA_FILES       = ./docs/deep-dive.png \
+                         ./docs/deep-dive.mp3 \
+                         ./docs/octicons/alert-16.svg \
+                         ./docs/octicons/bug-16.svg \
+                         ./docs/octicons/check-circle-16.svg \
+                         ./docs/octicons/check-circle-fill-16.svg \
+                         ./docs/octicons/checkbox-16.svg \
+                         ./docs/octicons/eye-16.svg \
+                         ./docs/octicons/info-16.svg \
+                         ./docs/octicons/light-bulb-16.svg \
+                         ./docs/octicons/report-16.svg \
+                         ./docs/octicons/stop-16.svg \
+                         ./docs/octicons/trash-16.svg
 
 #---------------------------------------------------------------------------
 # Configuration options related to the LaTeX output

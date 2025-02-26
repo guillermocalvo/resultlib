@@ -22,7 +22,7 @@
 #include "pet-store.h"
 
 // Prints pet details
-static void print_pet(const Pet pet) {
+static void print_pet(const struct pet *pet) {
   printf(">>> Pet(id: %d, name: %s, status: %s)\n",
     PET_ID(pet),
     PET_NAME(pet),

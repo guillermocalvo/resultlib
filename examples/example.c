@@ -18,7 +18,10 @@
 #include <string.h>
 #include <assert.h>
 #include <result.h>
+#include <stdio.h>
 #include "pet-store.h"
+
+int pet_store_application(int argc, char *argv[]);
 
 RESULT_STRUCT(pet_status, pet_error);
 
@@ -57,7 +60,7 @@ static void log_error(pet_error error) {
 /** [early_attempt] */
 // Returns the status of a pet by id
 pet_status get_pet_status(int id) {
-    Pet pet = find_pet(id);
+    const struct pet *pet = find_pet(id);
     return PET_STATUS(pet);
 }
 /** [early_attempt] */
@@ -66,12 +69,12 @@ pet_status get_pet_status(int id) {
 #define get_pet_status get_pet_status_using_pointers
 /** [using_pointers] */
 // Returns the status of a pet by id
-pet_error get_pet_status(int id, pet_status *status) {
-    Pet pet = find_pet(id);
+pet_error get_pet_status(int id, pet_status *out) {
+    const struct pet *pet = find_pet(id);
     if (pet == NULL) {
         return PET_NOT_FOUND;
     }
-    *status = PET_STATUS(pet);
+    *out = PET_STATUS(pet);
     return OK;
 }
 /** [using_pointers] */
@@ -81,7 +84,7 @@ pet_error get_pet_status(int id, pet_status *status) {
 /** [using_results] */
 // Returns the status of a pet by id
 RESULT(pet_status, pet_error) get_pet_status(int id) {
-    Pet pet = find_pet(id);
+    const struct pet *pet = find_pet(id);
     if (pet == NULL) {
         return (RESULT(pet_status, pet_error)) RESULT_FAILURE(PET_NOT_FOUND);
     }
@@ -104,11 +107,6 @@ RESULT(pet_status, pet_error) get_pet_status(int id) {
  * Example snippets.
  */
 int main() {
-
-#ifdef NDEBUG
-    return 77;
-#else
-
     {
 //! [result_struct]
 RESULT_STRUCT(pet_status, pet_error);
@@ -119,18 +117,30 @@ RESULT_STRUCT(pet_status, pet_error);
 //! [result]
 RESULT(pet_status, pet_error) result;
 //! [result]
+        (void) result;
+    }
+
+    {
+//! [result_tag]
+RESULT_STRUCT_TAG(Pet, const char *, RESULT_TAG(Pet, error_message));
+RESULT(Pet, error_message) result = RESULT_FAILURE("Oops");
+assert(strcmp(RESULT_USE_FAILURE(result), "Oops") == 0);
+//! [result_tag]
+        (void) result;
     }
 
     {
 //! [result_success]
 RESULT(pet_status, pet_error) result = RESULT_SUCCESS(AVAILABLE);
 //! [result_success]
+        (void) result;
     }
 
     {
 //! [result_failure]
 RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_NOT_FOUND);
 //! [result_failure]
+        (void) result;
     }
 
     {
@@ -139,6 +149,7 @@ RESULT(pet_status, pet_error) result = RESULT_SUCCESS(AVAILABLE);
 bool has_success = RESULT_HAS_SUCCESS(result);
 assert(has_success == true);
 //! [result_has_success]
+        (void) has_success;
     }
 
     {
@@ -147,6 +158,7 @@ RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_NOT_FOUND);
 bool has_failure = RESULT_HAS_FAILURE(result);
 assert(has_failure == true);
 //! [result_has_failure]
+        (void) has_failure;
     }
 
     {
@@ -155,6 +167,7 @@ RESULT(pet_status, pet_error) result = RESULT_SUCCESS(AVAILABLE);
 pet_status value = RESULT_USE_SUCCESS(result);
 assert(value == AVAILABLE);
 //! [result_use_success]
+        (void) value;
     }
 
     {
@@ -163,22 +176,25 @@ RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_NOT_FOUND);
 pet_error value = RESULT_USE_FAILURE(result);
 assert(value == PET_NOT_FOUND);
 //! [result_use_failure]
+        (void) value;
     }
 
     {
 //! [result_get_success]
 RESULT(pet_status, pet_error) result = RESULT_SUCCESS(AVAILABLE);
-pet_status *value = RESULT_GET_SUCCESS(result);
+const pet_status *value = RESULT_GET_SUCCESS(result);
 assert(*value == AVAILABLE);
 //! [result_get_success]
+        (void) value;
     }
 
     {
 //! [result_get_failure]
 RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_NOT_FOUND);
-pet_error *value = RESULT_GET_FAILURE(result);
+const pet_error *value = RESULT_GET_FAILURE(result);
 assert(*value == PET_NOT_FOUND);
 //! [result_get_failure]
+        (void) value;
     }
 
     {
@@ -187,6 +203,7 @@ RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_ALREADY_SOLD);
 pet_status value = RESULT_OR_ELSE(result, PENDING);
 assert(value == PENDING);
 //! [result_or_else]
+        (void) value;
     }
 
     {
@@ -196,6 +213,7 @@ RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_ALREADY_SOLD);
 pet_status value = RESULT_OR_ELSE_MAP(result, ERROR_TO_STATUS);
 assert(value == SOLD);
 //! [result_or_else_map]
+        (void) value;
     }
 #undef ERROR_TO_STATUS
 
@@ -240,6 +258,7 @@ RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
 RESULT(Pet, pet_error) filtered = RESULT_FILTER(result, is_available, PET_NOT_AVAILABLE);
 assert(RESULT_USE_FAILURE(filtered) == PET_NOT_AVAILABLE);
 //! [result_filter]
+        (void) filtered;
     }
 
     {
@@ -250,6 +269,7 @@ RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
 RESULT(Pet, pet_error) filtered = RESULT_FILTER_MAP(result, is_available, PET_TO_ERROR);
 assert(RESULT_USE_FAILURE(filtered) == PET_ALREADY_SOLD);
 //! [result_filter_map]
+        (void) filtered;
     }
 
 #undef is_available
@@ -262,6 +282,7 @@ RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_NOT_AVAILABLE);
 RESULT(pet_status, pet_error) recovered = RESULT_RECOVER(result, is_not_available, SOLD);
 assert(RESULT_USE_SUCCESS(recovered) == SOLD);
 //! [result_recover]
+        (void) recovered;
     }
 
     {
@@ -271,6 +292,7 @@ RESULT(pet_status, pet_error) result = RESULT_FAILURE(PET_NOT_AVAILABLE);
 RESULT(pet_status, pet_error) recovered = RESULT_RECOVER_MAP(result, is_not_available, ERROR_TO_STATUS);
 assert(RESULT_USE_SUCCESS(recovered) == PENDING);
 //! [result_recover_map]
+        (void) recovered;
     }
 #undef ERROR_TO_STATUS
 
@@ -309,6 +331,7 @@ RESULT(Pet, pet_error) result = RESULT_SUCCESS(&sold);
 RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP_SUCCESS(result, buy_pet);
 assert(RESULT_USE_FAILURE(mapped) == PET_NOT_AVAILABLE);
 //! [result_flat_map_success]
+        (void) mapped;
     }
 
     {
@@ -317,6 +340,7 @@ RESULT(Pet, pet_error) result = RESULT_FAILURE(PET_NOT_FOUND);
 RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP_FAILURE(result, pet_get_default);
 assert(strcmp(PET_NAME(RESULT_USE_SUCCESS(mapped)), "Default pet") == 0);
 //! [result_flat_map_failure]
+        (void) mapped;
     }
 
     {
@@ -327,6 +351,19 @@ RESULT(Pet, pet_error) mapped = RESULT_FLAT_MAP(result, buy_pet, pet_get_default
 assert(RESULT_USE_SUCCESS(mapped) == &available);
 assert(PET_STATUS(RESULT_USE_SUCCESS(mapped)) == SOLD);
 //! [result_flat_map]
+        (void) mapped;
+    }
+
+    {
+//! [result_debug]
+RESULT(Pet, pet_error) failure = RESULT_FAILURE(PET_NOT_FOUND);
+const char *func = RESULT_DEBUG_FUNC(failure);
+const char *file = RESULT_DEBUG_FILE(failure);
+const int line = RESULT_DEBUG_LINE(failure);
+fprintf(stderr, "Failure at %s (%s:%d)\n",
+  func ? func : "unknown function", file ? file : "unknown file", line);
+//! [result_debug]
+        (void) failure;
     }
 
     {
@@ -349,7 +386,6 @@ assert(PET_STATUS(RESULT_USE_SUCCESS(mapped)) == SOLD);
     }
 
     {
-        int pet_store_application(int argc, char *argv[]);
         assert(pet_store_application(1, (char * []) { "0" }) == 0);
         assert(pet_store_application(1, (char * []) { "1" }) != 0);
         assert(pet_store_application(1, (char * []) { "2" }) != 0);
@@ -357,5 +393,4 @@ assert(PET_STATUS(RESULT_USE_SUCCESS(mapped)) == SOLD);
     }
 
     return 0;
-#endif
 }

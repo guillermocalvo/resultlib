@@ -79,14 +79,15 @@ Suppose you need to write a function to get a pet's status.
 > [!WARNING]
 > This works... until someone passes an invalid ID. If `find_pet` returns `NULL`, your code could crash unexpectedly.
 
-To fix this, you refactor the function to return an error code and use a pointer to "return" the status.
+To fix this, you refactor the function to return an error code and use an [output parameter][OUTPUT_PARAMETERS] to
+"return" the pet status.
 
 ![][EXAMPLE_USING_POINTERS]
 
 It's safer, but also clunky.
 
 > [!WARNING]
-> What if the pointer is `NULL`? Should you return a new error code? Use `assert`? It's starting to feel messy.
+> What if the output pointer is `NULL`? Should you return a new error code? Use `assert`? It's starting to feel messy.
 
 Instead of juggling pointers and error codes, **you should return a Result object**.
 
@@ -94,8 +95,8 @@ Instead of juggling pointers and error codes, **you should return a Result objec
 
 > [!TIP]
 > The result encapsulates both success (pet status) and failure (error code) in one clean package. The caller
-> immediately knows the function can fail, and you've eliminated the need for a pointer. This is simpler, safer, and
-> much easier to read.
+> immediately knows the function can fail, and you've eliminated the need for an output pointer. This is simpler, safer,
+> and much easier to read.
 
 Encouraged, you refactor `find_pet` to return a failed result instead of `NULL` when a pet isn't found. Now,
 `get_pet_status` can rely on `find_pet` to handle errors and focus on the happy path.
@@ -116,7 +117,7 @@ With Results, handling success and failure feels natural, leaving you free to fo
 This library consists of one header file only. All you need to do is copy `result.h` into your project, and include it.
 
 ```c
-#include "result.h"
+#include <result.h>
 ```
 
 Since it's a header-only library, there is no library code to link against.
@@ -208,8 +209,8 @@ Results rely on modern C features such as [designated initializers][DESIGNATED_I
 
 ## Releases
 
-This library adheres to [Semantic Versioning](https://semver.org/). All notable changes for each version are documented
-in a [change log][CHANGELOG].
+This library adheres to [Semantic Versioning][SEMVER]. All notable changes for each version are documented in a
+[change log][CHANGELOG].
 
 Head over to GitHub for the [latest release][LATEST_RELEASE].
 
@@ -235,6 +236,7 @@ The source code is [available on GitHub][SOURCE_CODE].
 [LATEST_RELEASE]:               https://github.com/guillermocalvo/resultlib/releases/latest
 [NULL_CHECKING]:                https://en.wikipedia.org/wiki/Nullable_type#Compared_with_null_pointers
 [OUTPUT_PARAMETERS]:            https://en.wikipedia.org/wiki/Parameter_(computer_programming)#Output_parameters
+[SEMVER]:                       https://semver.org/
 [SENTINEL_VALUE]:               https://en.wikipedia.org/wiki/Sentinel_value
 [SOURCE_CODE]:                  https://github.com/guillermocalvo/resultlib
 [TYPEOF]:                       https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2899.htm

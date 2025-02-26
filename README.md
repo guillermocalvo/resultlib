@@ -78,14 +78,15 @@ Suppose you need to write a function to get a pet's status.
 > [!WARNING]
 > This works... until someone passes an invalid ID. If `find_pet` returns `NULL`, your code could crash unexpectedly.
 
-To fix this, you refactor the function to return an error code and use a pointer to "return" the status.
+To fix this, you refactor the function to return an error code and use an [output parameter][OUTPUT_PARAMETERS] to
+"return" the pet status.
 
 ![][EXAMPLE_USING_POINTERS]
 
 It's safer, but also clunky.
 
 > [!WARNING]
-> What if the pointer is `NULL`? Should you return a new error code? Use `assert`? It's starting to feel messy.
+> What if the output pointer is `NULL`? Should you return a new error code? Use `assert`? It's starting to feel messy.
 
 Instead of juggling pointers and error codes, **you should return a Result object**.
 
@@ -93,8 +94,8 @@ Instead of juggling pointers and error codes, **you should return a Result objec
 
 > [!TIP]
 > The result encapsulates both success (pet status) and failure (error code) in one clean package. The caller
-> immediately knows the function can fail, and you've eliminated the need for a pointer. This is simpler, safer, and
-> much easier to read.
+> immediately knows the function can fail, and you've eliminated the need for an output pointer. This is simpler, safer,
+> and much easier to read.
 
 Encouraged, you refactor `find_pet` to return a failed result instead of `NULL` when a pet isn't found. Now,
 `get_pet_status` can rely on `find_pet` to handle errors and focus on the happy path.
