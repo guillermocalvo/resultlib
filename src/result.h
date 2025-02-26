@@ -31,7 +31,7 @@
  * Since it's a header-only library, there is no library code to link against.
  *
  * @file        result.h
- * @version     0.1.0
+ * @version     1.0.0
  * @author      [Guillermo Calvo]
  * @copyright   Licensed under [Apache 2.0]
  * @see         For more information, visit the [project on GitHub]
@@ -46,7 +46,7 @@
 /**
  * Returns the major version number of this library.
  */
-#define RESULT_VERSION 0
+#define RESULT_VERSION 1
 
 #include <stddef.h> /* NULL */
 
