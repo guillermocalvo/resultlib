@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Guillermo Calvo
+ * Copyright 2025 Guillermo Calvo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,24 @@
 #include <result.h>
 #include "test.h"
 
-typedef struct { int x; int y; } point;
-typedef const char * text;
+typedef struct {
+    int x;
+    int y;
+} point;
+
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
+
 RESULT_STRUCT(point, text);
 
 #define POINT(x, y) \
     ((point) { x, y })
 
 static RESULT(int, text) validate(const point p) {
-    return p.x == 0 && p.y == 0 ? (RESULT(int, text)) RESULT_FAILURE("Invalid point") : (RESULT(int, text)) RESULT_SUCCESS(p.x + p.y);
+    return p.x == 0 && p.y == 0
+               ? (RESULT(int, text)) RESULT_FAILURE("Invalid point")
+               : (RESULT(int, text)) RESULT_SUCCESS(p.x + p.y);
 }
 
 /**

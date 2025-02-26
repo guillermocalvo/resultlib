@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Guillermo Calvo
+ * Copyright 2025 Guillermo Calvo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,15 @@
 #include <result.h>
 #include "test.h"
 
-typedef struct { int x;	int y; } point;
-typedef const char * text;
+typedef struct {
+    int x;
+    int y;
+} point;
+
+typedef const char *text;
+
 RESULT_STRUCT(point, text);
+
 RESULT_STRUCT(int, char);
 
 #define POINT(x, y) \
@@ -41,18 +47,18 @@ int main() {
     const RESULT(point, text) failure1 = RESULT_FAILURE("Small mistake");
     const RESULT(point, text) failure2 = RESULT_FAILURE("Failure");
     // When
-	const RESULT(int, char) mapped_success1 = RESULT_FLAT_MAP(success1, validate, first_char);
-	const RESULT(int, char) mapped_success2 = RESULT_FLAT_MAP(success2, validate, first_char);
-	const RESULT(int, char) mapped_failure1 = RESULT_FLAT_MAP(failure1, validate, first_char);
-	const RESULT(int, char) mapped_failure2 = RESULT_FLAT_MAP(failure2, validate, first_char);
-	// Then
-	TEST_ASSERT(RESULT_HAS_SUCCESS(mapped_success1));
-	TEST_ASSERT_INT_EQUALS(RESULT_USE_SUCCESS(mapped_success1), 579);
-	TEST_ASSERT(RESULT_HAS_FAILURE(mapped_success2));
-	TEST_ASSERT_CHAR_EQUALS(RESULT_USE_SUCCESS(mapped_success2), '?');
-	TEST_ASSERT(RESULT_HAS_SUCCESS(mapped_failure1));
-	TEST_ASSERT_INT_EQUALS(RESULT_USE_SUCCESS(mapped_failure1), 1);
-	TEST_ASSERT(RESULT_HAS_FAILURE(mapped_failure2));
-	TEST_ASSERT_CHAR_EQUALS(RESULT_USE_FAILURE(mapped_failure2), 'F');
+    const RESULT(int, char) mapped_success1 = RESULT_FLAT_MAP(success1, validate, first_char);
+    const RESULT(int, char) mapped_success2 = RESULT_FLAT_MAP(success2, validate, first_char);
+    const RESULT(int, char) mapped_failure1 = RESULT_FLAT_MAP(failure1, validate, first_char);
+    const RESULT(int, char) mapped_failure2 = RESULT_FLAT_MAP(failure2, validate, first_char);
+    // Then
+    TEST_ASSERT(RESULT_HAS_SUCCESS(mapped_success1));
+    TEST_ASSERT_INT_EQUALS(RESULT_USE_SUCCESS(mapped_success1), 579);
+    TEST_ASSERT(RESULT_HAS_FAILURE(mapped_success2));
+    TEST_ASSERT_CHAR_EQUALS(RESULT_USE_SUCCESS(mapped_success2), '?');
+    TEST_ASSERT(RESULT_HAS_SUCCESS(mapped_failure1));
+    TEST_ASSERT_INT_EQUALS(RESULT_USE_SUCCESS(mapped_failure1), 1);
+    TEST_ASSERT(RESULT_HAS_FAILURE(mapped_failure2));
+    TEST_ASSERT_CHAR_EQUALS(RESULT_USE_FAILURE(mapped_failure2), 'F');
     TEST_PASS;
 }

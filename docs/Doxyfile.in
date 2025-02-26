@@ -13,6 +13,7 @@ CREATE_SUBDIRS         = NO
 FULL_PATH_NAMES        = NO
 JAVADOC_AUTOBRIEF      = YES
 OPTIMIZE_OUTPUT_FOR_C  = YES
+MARKDOWN_ID_STYLE      = GITHUB
 
 
 #---------------------------------------------------------------------------
@@ -37,7 +38,9 @@ WARN_AS_ERROR          = YES
 #---------------------------------------------------------------------------
 
 INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/src/ \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/README.md
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/README.md \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/examples.md \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/license.md
 FILE_PATTERNS          = *.c \
                          *.h \
                          *.md
@@ -65,13 +68,25 @@ ALPHABETICAL_INDEX     = NO
 #---------------------------------------------------------------------------
 
 GENERATE_HTML          = YES
-HTML_FOOTER            = footer.html
+HTML_FOOTER            = @CMAKE_CURRENT_SOURCE_DIR@/docs/footer.html
+DISABLE_INDEX          = NO
 GENERATE_TREEVIEW      = YES
 HTML_EXTRA_STYLESHEET  = @AWESOME_CSS_DIR@/doxygen-awesome.css \
                          @AWESOME_CSS_DIR@/doxygen-awesome-sidebar-only.css \
                          @CMAKE_CURRENT_SOURCE_DIR@/docs/result-library.css
 HTML_EXTRA_FILES       = @CMAKE_CURRENT_SOURCE_DIR@/docs/deep-dive.png \
-                         @CMAKE_CURRENT_SOURCE_DIR@/docs/deep-dive.mp3
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/deep-dive.mp3 \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/alert-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/bug-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/check-circle-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/check-circle-fill-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/checkbox-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/eye-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/info-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/light-bulb-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/report-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/stop-16.svg \
+                         @CMAKE_CURRENT_SOURCE_DIR@/docs/octicons/trash-16.svg
 
 #---------------------------------------------------------------------------
 # Configuration options related to the LaTeX output
@@ -120,6 +135,13 @@ GENERATE_AUTOGEN_DEF   = NO
 #---------------------------------------------------------------------------
 
 GENERATE_PERLMOD       = NO
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the preprocessor
+#---------------------------------------------------------------------------
+
+PREDEFINED             = __bool_true_false_are_defined
 
 
 #---------------------------------------------------------------------------

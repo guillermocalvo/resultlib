@@ -7,6 +7,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [Unreleased]
+
+- Refactor `RESULT_IF` macros so `result` doesn't have to be an lvalue.
+- Remove `const` qualifier so result variables can be reassigned.
+- Define debug macros even if `NDEBUG` is defined.
+- Include `stddef.h` for `NULL`.
+
+### Changed
+
+- Macro `RESULT_STRUCT_TAG`
+- Macro `RESULT_IF_SUCCESS`
+- Macro `RESULT_IF_FAILURE`
+- Macro `RESULT_IF_SUCCESS_OR_ELSE`
+- Macro `RESULT_DEBUG_FUNC`
+- Macro `RESULT_DEBUG_FILE`
+- Macro `RESULT_DEBUG_LINE`
+
+
 ## [0.1.0]
 
 Initial development release.
@@ -46,4 +64,5 @@ Initial development release.
 - Macro `RESULT_DEBUG_LINE`
 
 
+[Unreleased]: https://github.com/guillermocalvo/resultlib/compare/main...develop
 [0.1.0]: https://github.com/guillermocalvo/resultlib/releases/tag/0.1.0

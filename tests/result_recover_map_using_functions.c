@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Guillermo Calvo
+ * Copyright 2025 Guillermo Calvo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,15 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
 
-static bool is_recoverable(const char * s) {
+static bool is_recoverable(const char *s) {
     return *s != 'F';
 }
 
-static int to_number(const char * s) {
+static int to_number(const char *s) {
     return *s == 'T' ? 1 : -1;
 }
 

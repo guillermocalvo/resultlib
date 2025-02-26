@@ -1,12 +1,12 @@
 
-![][LOGO]
-
+<div style="justify-items: center">
+<img style="display: block" src="result-logo.svg">
+</div>
 
 # Introduction
 
-Wave goodbye to [output parameters][OUTPUT_PARAMETERS], [sentinel values][SENTINEL_VALUE], and endless
-[null checking][NULL_CHECKING]! Embrace clean, efficient error handling today by encapsulating operations that may
-succeed or fail in a type-safe way.
+Wave goodbye to *output parameters*, *sentinel values*, and endless *null checking*! Embrace clean, efficient error
+handling today by encapsulating operations that may succeed or fail in a type-safe way.
 
 <div class="features" markdown="1">
 
@@ -54,9 +54,10 @@ just a few minutes, you'll get the essential details and a fun intro to what thi
 
 ## Results in a Nutshell
 
-Result objects represent the outcome of an operation, removing the need for *output parameters* and *null checking*.
-Operations that succeed produce results encapsulating a *success* value; operations that fail produce results with a
-*failure* value. Success and failure can be represented by whatever types make the most sense for each operation.
+Result objects represent the outcome of an operation, removing the need for [output parameters][OUTPUT_PARAMETERS],
+[sentinel values][SENTINEL_VALUE], and [null checking][NULL_CHECKING]. Operations that succeed produce results
+encapsulating a *success* value; operations that fail produce results with a *failure* value. Success and failure can be
+represented by whatever types make the most sense for each operation.
 
 Let's use a *pet store* example to show how this library can simplify your code.
 
@@ -78,14 +79,15 @@ Suppose you need to write a function to get a pet's status.
 > [!WARNING]
 > This works... until someone passes an invalid ID. If `find_pet` returns `NULL`, your code could crash unexpectedly.
 
-To fix this, you refactor the function to return an error code and use a pointer to "return" the status.
+To fix this, you refactor the function to return an error code and use an [output parameter][OUTPUT_PARAMETERS] to
+"return" the pet status.
 
 ![][EXAMPLE_USING_POINTERS]
 
 It's safer, but also clunky.
 
 > [!WARNING]
-> What if the pointer is `NULL`? Should you return a new error code? Use `assert`? It's starting to feel messy.
+> What if the output pointer is `NULL`? Should you return a new error code? Use `assert`? It's starting to feel messy.
 
 Instead of juggling pointers and error codes, **you should return a Result object**.
 
@@ -93,8 +95,8 @@ Instead of juggling pointers and error codes, **you should return a Result objec
 
 > [!TIP]
 > The result encapsulates both success (pet status) and failure (error code) in one clean package. The caller
-> immediately knows the function can fail, and you've eliminated the need for a pointer. This is simpler, safer, and
-> much easier to read.
+> immediately knows the function can fail, and you've eliminated the need for an output pointer. This is simpler, safer,
+> and much easier to read.
 
 Encouraged, you refactor `find_pet` to return a failed result instead of `NULL` when a pet isn't found. Now,
 `get_pet_status` can rely on `find_pet` to handle errors and focus on the happy path.
@@ -115,7 +117,7 @@ With Results, handling success and failure feels natural, leaving you free to fo
 This library consists of one header file only. All you need to do is copy `result.h` into your project, and include it.
 
 ```c
-#include "result.h"
+#include <result.h>
 ```
 
 Since it's a header-only library, there is no library code to link against.
@@ -200,66 +202,41 @@ Since it's a header-only library, there is no library code to link against.
 
 # Additional Info
 
-This library relies on modern C features such as [designated initializers][DESIGNATED_INITIALIZERS],
+## Compatibility
+
+Results rely on modern C features such as [designated initializers][DESIGNATED_INITIALIZERS],
 [compound literals][COMPOUND_LITERALS], and [typeof][TYPEOF].
+
+## Releases
+
+This library adheres to [Semantic Versioning][SEMVER]. All notable changes for each version are documented in a
+[change log][CHANGELOG].
+
+Head over to GitHub for the [latest release][LATEST_RELEASE].
+
+[![Latest Release][BADGE_LATEST_RELEASE]][LATEST_RELEASE]
 
 ## Source Code
 
 The source code is [available on GitHub][SOURCE_CODE].
 
-## Author
-
-Copyright 2024 [Guillermo Calvo][AUTHOR].
-
-[![][GUILLERMO_IMAGE]][GUILLERMO]
-
-## License
-
-This library is licensed under the *Apache License, Version 2.0* (the "License");
-you may not use it except in compliance with the License.
-
-You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>
-
-Unless required by applicable law or agreed to in writing, software distributed under the License
-is distributed on an "AS IS" BASIS, **WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND**, either express or implied.
-
-See the License for the specific language governing permissions and limitations under the License.
+[![Fork me on GitHub][BADGE_GITHUB]][SOURCE_CODE]
 
 
-**Permitted:**
-
-- **Commercial Use**: You may use this library and derivatives for commercial purposes.
-- **Modification**: You may modify this library.
-- **Distribution**: You may distribute this library.
-- **Patent Use**: This license provides an express grant of patent rights from contributors.
-- **Private Use**: You may use and modify this library without distributing it.
-
-**Required:**
-
-- **License and Copyright Notice**: If you distribute this library you must include a copy of the license and copyright
-  notice.
-- **State Changes**: If you modify and distribute this library you must document changes made to this library.
-
-**Forbidden:**
-
-- **Trademark use**: This license does not grant any trademark rights.
-- **Liability**: The library author cannot be held liable for damages.
-- **Warranty**: This library is provided without any warranty.
-
-
-[AUTHOR]:                       https://github.com/guillermocalvo/
+[BADGE_GITHUB]:                 https://img.shields.io/badge/Fork_me_on_GitHub-black?logo=github
+[BADGE_LATEST_RELEASE]:         https://img.shields.io/github/v/release/guillermocalvo/resultlib
+[CHANGELOG]:                    https://github.com/guillermocalvo/resultlib/blob/main/CHANGELOG.md
 [COMPOUND_LITERALS]:            https://gcc.gnu.org/onlinedocs/gcc-3.3/gcc/Compound-Literals.html
 [DESIGNATED_INITIALIZERS]:      https://gcc.gnu.org/onlinedocs/gcc-3.3/gcc/Designated-Inits.html
-[EXAMPLE_EARLY_ATTEMPT]:        docs/early-attempt.png
-[EXAMPLE_EMBRACING_RESULTS]:    docs/embracing-results.png
-[EXAMPLE_USING_POINTERS]:       docs/using-pointers.png
-[EXAMPLE_USING_RESULTS]:        docs/using-results.png
-[GUILLERMO]:                    https://guillermo.dev/
-[GUILLERMO_IMAGE]:              https://guillermo.dev/assets/images/thumb.png
+[EXAMPLE_EARLY_ATTEMPT]:        early-attempt.png
+[EXAMPLE_EMBRACING_RESULTS]:    embracing-results.png
+[EXAMPLE_USING_POINTERS]:       using-pointers.png
+[EXAMPLE_USING_RESULTS]:        using-results.png
 [NETBOOKLM]:                    https://notebooklm.google.com/
-[LOGO]:                         docs/result-logo.svg
+[LATEST_RELEASE]:               https://github.com/guillermocalvo/resultlib/releases/latest
 [NULL_CHECKING]:                https://en.wikipedia.org/wiki/Nullable_type#Compared_with_null_pointers
 [OUTPUT_PARAMETERS]:            https://en.wikipedia.org/wiki/Parameter_(computer_programming)#Output_parameters
+[SEMVER]:                       https://semver.org/
 [SENTINEL_VALUE]:               https://en.wikipedia.org/wiki/Sentinel_value
 [SOURCE_CODE]:                  https://github.com/guillermocalvo/resultlib
 [TYPEOF]:                       https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2899.htm

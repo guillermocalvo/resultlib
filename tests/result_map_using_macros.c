@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Guillermo Calvo
+ * Copyright 2025 Guillermo Calvo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,15 @@
 #include <result.h>
 #include "test.h"
 
-typedef struct { int x; int y; } point;
-typedef const char * text;
+typedef struct {
+    int x;
+    int y;
+} point;
+
+typedef const char *text;
+
 RESULT_STRUCT(int, char);
+
 RESULT_STRUCT(point, text);
 
 #define point_get_x(p) \
@@ -33,7 +39,7 @@ RESULT_STRUCT(point, text);
  */
 int main() {
     // Given
-    const point p = { 123, 456 };
+    const point p = {123, 456};
     const RESULT(point, text) success = RESULT_SUCCESS(p);
     const RESULT(point, text) failure = RESULT_FAILURE("Failure");
     // When

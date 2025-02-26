@@ -2,16 +2,15 @@
 [![Build Status][BADGE_BUILD_STATUS]][BUILD_STATUS]
 [![Quality Gate Status][BADGE_QUALITY_GATE]][QUALITY_GATE]
 [![Docs Status][BADGE_DOCS_STATUS]][DOCS]
-[![Latest Release][BADGE_LATEST_RELEASE]][RELEASES]
+[![Latest Release][BADGE_LATEST_RELEASE]][LATEST_RELEASE]
 
 ![Result Library][LOGO]
 
 
 ## A header-only C library to handle errors elegantly
 
-Wave goodbye to [output parameters][OUTPUT_PARAMETERS], [sentinel values][SENTINEL_VALUE], and endless
-[null checking][NULL_CHECKING]! Embrace clean, efficient error handling today by encapsulating operations that may
-succeed or fail in a type-safe way.
+Wave goodbye to *output parameters*, *sentinel values*, and endless *null checking*! Embrace clean, efficient error
+handling today by encapsulating operations that may succeed or fail in a type-safe way.
 
 ### Main Features
 
@@ -33,9 +32,10 @@ succeed or fail in a type-safe way.
 
 ## Results in a Nutshell
 
-Result objects represent the outcome of an operation, removing the need for *output parameters* and *null checking*.
-Operations that succeed produce results encapsulating a *success* value; operations that fail produce results with a
-*failure* value. Success and failure can be represented by whatever types make the most sense for each operation.
+Result objects represent the outcome of an operation, removing the need for [output parameters][OUTPUT_PARAMETERS],
+[sentinel values][SENTINEL_VALUE], and [null checking][NULL_CHECKING]. Operations that succeed produce results
+encapsulating a *success* value; operations that fail produce results with a *failure* value. Success and failure can be
+represented by whatever types make the most sense for each operation.
 
 Let's use a *pet store* example to show how this library can simplify your code.
 
@@ -78,14 +78,15 @@ Suppose you need to write a function to get a pet's status.
 > [!WARNING]
 > This works... until someone passes an invalid ID. If `find_pet` returns `NULL`, your code could crash unexpectedly.
 
-To fix this, you refactor the function to return an error code and use a pointer to "return" the status.
+To fix this, you refactor the function to return an error code and use an [output parameter][OUTPUT_PARAMETERS] to
+"return" the pet status.
 
 ![][EXAMPLE_USING_POINTERS]
 
 It's safer, but also clunky.
 
 > [!WARNING]
-> What if the pointer is `NULL`? Should you return a new error code? Use `assert`? It's starting to feel messy.
+> What if the output pointer is `NULL`? Should you return a new error code? Use `assert`? It's starting to feel messy.
 
 Instead of juggling pointers and error codes, **you should return a Result object**.
 
@@ -93,8 +94,8 @@ Instead of juggling pointers and error codes, **you should return a Result objec
 
 > [!TIP]
 > The result encapsulates both success (pet status) and failure (error code) in one clean package. The caller
-> immediately knows the function can fail, and you've eliminated the need for a pointer. This is simpler, safer, and
-> much easier to read.
+> immediately knows the function can fail, and you've eliminated the need for an output pointer. This is simpler, safer,
+> and much easier to read.
 
 Encouraged, you refactor `find_pet` to return a failed result instead of `NULL` when a pet isn't found. Now,
 `get_pet_status` can rely on `find_pet` to handle errors and focus on the happy path.
@@ -110,7 +111,7 @@ With Results, handling success and failure feels natural, leaving you free to fo
 
 ## Author
 
-Copyright 2024 [Guillermo Calvo][AUTHOR].
+Copyright 2025 [Guillermo Calvo][AUTHOR].
 
 [![][GUILLERMO_IMAGE]][GUILLERMO]
 
@@ -164,10 +165,10 @@ See the License for the specific language governing permissions and limitations 
 [EXAMPLE_USING_RESULTS]:        docs/using-results.png
 [GUILLERMO]:                    https://guillermo.dev/
 [GUILLERMO_IMAGE]:              https://guillermo.dev/assets/images/thumb.png
+[LATEST_RELEASE]:               https://github.com/guillermocalvo/resultlib/releases/latest
 [LOGO]:                         docs/result-logo.svg
 [NULL_CHECKING]:                https://en.wikipedia.org/wiki/Nullable_type#Compared_with_null_pointers
 [OUTPUT_PARAMETERS]:            https://en.wikipedia.org/wiki/Parameter_(computer_programming)#Output_parameters
 [QUALITY_GATE]:                 https://sonarcloud.io/dashboard?id=guillermocalvo_resultlib
-[RELEASES]:                     https://github.com/guillermocalvo/resultlib/releases
 [SENTINEL_VALUE]:               https://en.wikipedia.org/wiki/Sentinel_value
 [TYPEOF]:                       https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2899.htm

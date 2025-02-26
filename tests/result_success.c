@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Guillermo Calvo
+ * Copyright 2025 Guillermo Calvo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,21 @@
 #include <result.h>
 #include "test.h"
 
+RESULT_STRUCT(int, char);
+
 /**
  * Tests `RESULT_SUCCESS`.
  */
 int main() {
     // Given
-    const RESULT_STRUCT(int, char) result = RESULT_SUCCESS(512);
+    const RESULT(int, char) result = RESULT_SUCCESS(512);
     // Then
     TEST_ASSERT_FALSE(result._failed);
     TEST_ASSERT_INT_EQUALS(result._value._success, 512);
 #ifndef NDEBUG
     TEST_ASSERT_STR_EQUALS(result._debug._func, "main");
     TEST_ASSERT_STR_CONTAINS(result._debug._file, "result_success.c");
-    TEST_ASSERT_INT_EQUALS(result._debug._line, 25);
+    TEST_ASSERT_INT_EQUALS(result._debug._line, 27);
 #endif
     TEST_PASS;
 }

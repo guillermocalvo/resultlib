@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Guillermo Calvo
+ * Copyright 2025 Guillermo Calvo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ int main() {
     const RESULT(int, char) success = RESULT_SUCCESS(512);
     const RESULT(int, char) failure = RESULT_FAILURE('A');
     // When
-    const char * success_get_failure = RESULT_GET_FAILURE(success);
-    const char * failure_get_failure = RESULT_GET_FAILURE(failure);
+    const char *success_get_failure = RESULT_GET_FAILURE(success);
+    const char *failure_get_failure = RESULT_GET_FAILURE(failure);
     // Then
     TEST_ASSERT_NULL(success_get_failure);
     TEST_ASSERT_NOT_NULL(failure_get_failure);

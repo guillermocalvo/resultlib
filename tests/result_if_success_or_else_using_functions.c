@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Guillermo Calvo
+ * Copyright 2025 Guillermo Calvo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 #include <result.h>
 #include "test.h"
 
-typedef const char * text;
+typedef const char *text;
+
 RESULT_STRUCT(int, text);
 
 static bool on_success1_executed = false;
@@ -26,18 +27,22 @@ static bool on_failure1_executed = false;
 static bool on_failure2_executed = false;
 
 static void on_success1(int _) {
+    (void) _;
     on_success1_executed = true;
 }
 
 static void on_success2(int _) {
+    (void) _;
     on_success2_executed = true;
 }
 
 static void on_failure1(text _) {
+    (void) _;
     on_failure1_executed = true;
 }
 
 static void on_failure2(text _) {
+    (void) _;
     on_failure2_executed = true;
 }
 
