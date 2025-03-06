@@ -269,7 +269,7 @@
  * @param result The result to retrieve the failure value from.
  * @return @b result's failure value.
  *
- * @see RESULT_USE_FAILURE
+ * @see RESULT_USE_SUCCESS
  */
 #define RESULT_USE_FAILURE(result)                                          \
   ((result)._value._failure)
@@ -277,7 +277,7 @@
 /**
  * Returns a result's success value as a possibly-null pointer.
  *
- * @pre @b result MUST be an @e value.
+ * @pre @b result MUST be an @e lvalue.
  *
  * @b Example:
  * @snippet example.c result_get_success
@@ -438,8 +438,8 @@
  * @b Example:
  * @snippet example.c result_filter
  *
- * @param result The result to map the success value from.
- * @param is_acceptable The predicate function or macro to apply to the
+ * @param result The result to filter.
+ * @param is_acceptable The predicate function or macro to apply to @b result's
  *   success value.
  * @param failure The failure value if not acceptable.
  * @return If @b result is successful and its success value is deemed not
@@ -466,11 +466,11 @@
  * @b Example:
  * @snippet example.c result_filter_map
  *
- * @param result The result to map the success value from.
- * @param is_acceptable The predicate function or macro to apply to the
+ * @param result The result to filter.
+ * @param is_acceptable The predicate function or macro to apply to @b result's
  *   success value.
- * @param success_mapper The mapping function or macro that produces the
- *   failure value.
+ * @param success_mapper The mapping function or macro that produces the failure
+ *   value.
  * @return If @b result is successful and its value is deemed not acceptable, a
  *   new failed result holding the value produced by @b success_mapper;
  *   otherwise, the supplied @b result.
@@ -492,8 +492,8 @@
  * @b Example:
  * @snippet example.c result_recover
  *
- * @param result The result to map the failure value from.
- * @param is_recoverable The predicate function or macro to apply to the
+ * @param result The result to recover.
+ * @param is_recoverable The predicate function or macro to apply to @b result's
  *   failure value.
  * @param success The success value if recoverable.
  * @return If @b result is failed and its value is deemed recoverable, a new
@@ -519,11 +519,11 @@
  * @b Example:
  * @snippet example.c result_recover_map
  *
- * @param result The result to map the failure value from.
- * @param is_recoverable The predicate function or macro to apply to the
+ * @param result The result to recover.
+ * @param is_recoverable The predicate function or macro to apply to @b result's
  *   failure value.
- * @param failure_mapper The mapping function or macro that produces the
- *   success value.
+ * @param failure_mapper The mapping function or macro that produces the success
+ *   value.
  * @return If @b result is failed and its value is deemed recoverable, a new
  *   successful result holding the value produced by @b failure_mapper;
  *   otherwise, the supplied @b result.
@@ -548,7 +548,7 @@
  * @param result The result whose success value will be transformed.
  * @param success_mapper The mapping function or macro that produces the new
  *   success value.
- * @param result_type The type of transformed result type.
+ * @param result_type The type of the transformed result type.
  * @return If @b result is successful, a new successful result holding the value
  *   produced by @b success_mapper; otherwise, the supplied @b result.
  *
@@ -576,7 +576,7 @@
  * @param result The result whose failure value will be transformed.
  * @param failure_mapper The mapping function or macro that produces the new
  *   failure value.
- * @param result_type The type of transformed result type.
+ * @param result_type The type of the transformed result type.
  * @return If @b result is failed, a new failed result holding the value
  *   produced by @b failure_mapper; otherwise, the supplied @b result.
  *
@@ -606,7 +606,7 @@
  *   success value.
  * @param failure_mapper The mapping function or macro that produces the new
  *   failure value.
- * @param result_type The type of transformed result type.
+ * @param result_type The type of the transformed result type.
  * @return If @b result is successful, a new successful result holding the value
  *   produced by @b success_mapper; otherwise, a new failed result holding the
  *   value produced by @b failure_mapper.

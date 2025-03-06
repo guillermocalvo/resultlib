@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-No unreleased changes.
+### Fixed
+
+- Updated documentation.
 
 
 ## [1.0.0]
