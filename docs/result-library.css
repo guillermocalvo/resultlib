@@ -159,3 +159,10 @@ div.features {
     flex: 100%;
   }
 }
+
+/* Temporary patch to fix navigation path */
+#nav-path ul li.navelem:first-child,
+#nav-path ul li.navelem:after,
+#nav-path ul li.navelem:before {
+  display: none;
+}
