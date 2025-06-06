@@ -122,6 +122,21 @@ This library consists of one header file only. All you need to do is copy `resul
 
 Since it's a header-only library, there is no library code to link against.
 
+Result library is also available in the [Conan Center index repository](https://conan.io/center/recipes/resultlib), and
+the [vcpkg package repository](https://vcpkg.io/en/package/resultlib).
+
+> [!TIP]
+> If you're using [Conan](https://conan.io/), you can add Results to your build file:
+> ```
+> [requires]
+> resultlib/1.0.0
+> ```
+> And if you're using [vcpkg](https://github.com/Microsoft/vcpkg), you can install the port:
+> ```
+> vcpkg install resultlib
+> ```
+> Finally, include `resultlib/result.h` file in your source code.
+
 ## Result Types and Variables
 
 - #RESULT_STRUCT @copybrief RESULT_STRUCT
