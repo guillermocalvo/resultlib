@@ -3,6 +3,8 @@
 [![Quality Gate Status][BADGE_QUALITY_GATE]][QUALITY_GATE]
 [![Docs Status][BADGE_DOCS_STATUS]][DOCS]
 [![Latest Release][BADGE_LATEST_RELEASE]][LATEST_RELEASE]
+[![Conan Center](https://img.shields.io/conan/v/resultlib)](https://conan.io/center/recipes/resultlib)
+[![vcpkg](https://img.shields.io/vcpkg/v/resultlib)](https://vcpkg.io/en/package/resultlib)
 
 ![Result Library][LOGO]
 
