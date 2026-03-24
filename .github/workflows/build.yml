@@ -59,7 +59,7 @@ jobs:
     # TEST REPORT
     # ================================
     - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v5
+      uses: mikepenz/action-junit-report@v6
       if: success() || failure()
       with:
         check_name: ${{ matrix.build_type }} Test Report
