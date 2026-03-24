@@ -87,6 +87,8 @@ HTML_EXTRA_FILES       = ./docs/deep-dive.png \
                          ./docs/octicons/report-16.svg \
                          ./docs/octicons/stop-16.svg \
                          ./docs/octicons/trash-16.svg
+HTML_COPY_CLIPBOARD    = NO
+
 
 #---------------------------------------------------------------------------
 # Configuration options related to the LaTeX output
