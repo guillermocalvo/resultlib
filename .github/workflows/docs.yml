@@ -85,4 +85,4 @@ jobs:
     # ================================
     - name: Publish documentation to GitHub Pages
       if: inputs.publish || github.event_name == 'push'
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5
